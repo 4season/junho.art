@@ -67,7 +67,7 @@ const DEFAULT_PROJECTS = [
         tags: ['Python', 'Deep-Learning', 'CNN']
     },
     {
-        name: 'Portfolio Website',
+        name: '포트폴리오 웹사이트',
         description: PROJECT_DESCRIPTIONS['junho.art'],
         url: 'https://github.com/4season/junho.art',
         image: PROJECT_IMAGES['junho.art'],
@@ -90,7 +90,7 @@ function renderProjects(projects) {
 
         // 카드 컴포넌트 마크업 생성 (기존 디자인 및 클래스 구조 그대로 유지)
         htmlContent += `
-                <div class="project-card glass-card">
+                <div class="project-card">
                     <img src="${project.image}" alt="${project.name} 프로젝트 이미지">
                     <h3>${project.name}</h3>
                     <p>${project.description || 'GitHub 프로젝트 상세 설명이 제공되지 않았습니다.'}</p>
@@ -135,8 +135,8 @@ async function loadGitHubProjects() {
             // 설명 영어 통일 및 매핑 (로컬 매핑 테이블에 영어 설명이 지정되어 있다면 우선 채움)
             const description = PROJECT_DESCRIPTIONS[repo.name] || repo.description;
 
-            // 영어 명칭 특별 맵핑 (junho.art인 경우 화면에 Portfolio Website로 표시)
-            const displayName = repo.name === 'junho.art' ? 'Portfolio Website' : repo.name;
+            // 한글 명칭 특별 맵핑 (junho.art인 경우 화면에 포트폴리오 웹사이트로 표시)
+            const displayName = repo.name === 'junho.art' ? '포트폴리오 웹사이트' : repo.name;
 
             return {
                 name: displayName,
@@ -162,45 +162,4 @@ if (document.readyState === 'loading') {
 } else {
     loadGitHubProjects(); // Cloudflare Rocket Loader 등으로 인해 이미 로드가 완료된 경우 즉시 실행
 }
-
-// === CSS view-timeline 미지원 브라우저용 스크롤 리빌 폴백 ===
-function initScrollRevealFallback() {
-    // 브라우저가 view-timeline을 지원하는지 체크
-    const supportsViewTimeline = CSS.supports && CSS.supports('(animation-timeline: view()) and (animation-range: entry)');
-    
-    if (!supportsViewTimeline) {
-        // 미지원 브라우저일 때 HTML/Body에 no-view-timeline 클래스 부여
-        document.documentElement.classList.add('no-view-timeline');
-        
-        // IntersectionObserver를 이용한 인뷰(in-view) 체크
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15 // 15% 이상 보일 때 활성화
-        };
-        
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                    // 한번 보이면 관찰을 중단하여 성능 확보 (일방향 페이드인 효과)
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // 대상 요소 관찰 시작
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    }
-}
-
-// 초기화 함수 실행 등록
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollRevealFallback);
-} else {
-    initScrollRevealFallback();
-}
-
 
