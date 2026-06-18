@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>June's Art</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 아이콘 라이브러리 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- 'Gowun Dodum' 폰트 불러오기 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+   
+    <!-- 파비콘 설정 코드 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./favicon_io/site.webmanifest">
+
+    <!-- 깃허브 활동 그래프 라이브러리 -->
+    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+</head>
+<body>
+
+    <!-- 모바일/태블릿용 네비게이션 드로어 -->
+    <div class="nav-drawer" id="navDrawer">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <a href="#about">소개</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#github-activity">활동</a>
+        <a href="https://github.com/4season" target="_blank">GitHub</a>
+    </div>
+
+    <!-- 헤더 영역 -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">JUNE.ART</a>
+            <nav class="desktop-nav">
+                <a href="#about">소개</a>
+                <a href="#projects">프로젝트</a>
+                <a href="#github-activity">활동</a>
+                <a href="https://github.com/4season" target="_blank">GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </nav>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <!-- 소개 섹션 -->
+        <section id="about" class="section">
+            <img src="https://github.com/4season.png" alt="프로필 이미지" class="profile-img">
+            <h1>안녕하세요, June입니다.</h1>
+            <p>새로운 아이디어를 현실로 만드는 것을 즐기는 개발자입니다.<br>
+            저의 작업과 고민의 흔적들을 이곳에 기록합니다.</p>
+            
+	    <div class="github-cards-container">
+                <!-- 새로운 디자인의 깃허브 스탯 카드 -->
+                <div class="github-stats">
+		    <img src="https://github-readme-stats-snowy-six-56.vercel.app/api?username=4season&show_icons=true&bg_color=fff9fb&title_color=b37f8c&text_color=594a4e&icon_color=86b37f&border_color=f2e8ea&border_radius=10&cache_seconds=1800" alt="June's GitHub stats" />
+                </div>
+                <!-- ✨새로운 언어 통계 카드✨ -->
+                <div class="github-stats">
+                    <img src="https://github-readme-stats-snowy-six-56.vercel.app/api/top-langs/?username=4season&layout=compact&bg_color=fff9fb&title_color=b37f8c&text_color=594a4e&border_radius=10&border_color=f2e8ea&cache_seconds=1800" alt="June's Top Languages" />
+                </div>
+	    </div>
+
+            <a href="https://github.com/4season" class="button" target="_blank">
+                <i class="fa-brands fa-github"></i> 깃허브 방문하기
+            </a>
+        </section>
+
+        <!-- 프로젝트 섹션 -->
+        <section id="projects" class="section">
+            <h2><i class="fa-solid fa-lightbulb"></i> Projects</h2>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <img src="./img/IMG_8978.jpg" alt="카카오톡 봇 프로젝트 이미지">
+                    <h3>Magnolia</h3>
+                    <p>일상 생활에 편리함을 더해주는 똑똑한 카카오톡 봇 프로젝트 입니다. Go, Rust, kotlin기반으로 제작했어요.</p>
+                    <div class="tags">
+                        <span>Go</span>
+			<span>Rust</span>
+			<span>Kotlin</span>
+                        <span>API</span>
+                        <span>Chatbot</span>
+                    </div>
+                    <a href="https://github.com/4season/Magnolia" class="project-link">자세히 보기 &rarr;</a>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800" alt="두 번째 프로젝트 이미지">
+                    <h3>포트폴리오 웹사이트</h3>
+                    <p>저를 소개하기 위해 만든 첫 번째 웹사이트입니다. HTML, CSS, JavaScript로 제작했어요.</p>
+                    <div class="tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <a href="#" class="project-link">자세히 보기 &rarr;</a>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- 깃허브 활동 그래프 섹션 -->
+        <section id="github-activity" class="section">
+            <h2><i class="fa-brands fa-pagelines"></i> GitHub Activity</h2>
+            <div class="calendar">
+                <!-- 깃허브 활동 그래프가 여기에 표시됩니다 -->
+                Loading data...
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 영역 -->
+    <footer>
+        <p>&copy; 2025 June. All rights reserved.</p>
+    </footer>
+
+    <!-- 자바스크립트 파일들 -->
+	<script src="script.js"></script>
+	<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+	<script>
+	GitHubCalendar(".calendar", "4season", { 
+            responsive: true,
+            tooltips: true
+        });
+	</script>
+</body>
+</html>
