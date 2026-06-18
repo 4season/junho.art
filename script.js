@@ -145,6 +145,10 @@ async function loadGitHubProjects() {
     }
 }
 
-// DOM이 완전히 로드되면 GitHub 프로젝트 로딩 시작
-document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+// DOM이 완전히 로드되었는지 확인하고 GitHub 프로젝트 로딩 시작
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+} else {
+    loadGitHubProjects(); // Cloudflare Rocket Loader 등으로 인해 이미 로드가 완료된 경우 즉시 실행
+}
 
