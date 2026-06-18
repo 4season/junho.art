@@ -30,37 +30,45 @@ const LOCAL_JSON_URL = 'pinned-repos.json';
 // 기본 대표 이미지 매핑 테이블
 const PROJECT_IMAGES = {
     'Magnolia': './img/IMG_8978.jpg',
-    'sobdm-project': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800', // 버스 예측 관련 코딩 이미지
-    'ConvDDI': 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800',     // 약물 상호작용 관련 화학/실험 이미지
+    'sobdm-project': 'https://images.unsplash.com/photo-1557223562-6c77ef16210f?q=80&w=800', // 성남시 109번 마을버스와 유사한 한국식 초록색 버스 이미지
+    'ConvDDI': 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=800',     // 약물 상호작용 관련 알약/의약 이미지
     'junho.art': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800'     // 포트폴리오 웹사이트 이미지
+};
+
+// 가독성을 위한 프로젝트별 영문 설명 매핑 테이블 (GitHub 설명보다 우선 반영됨)
+const PROJECT_DESCRIPTIONS = {
+    'Magnolia': 'An intelligent KakaoTalk chatbot built with Go, Rust, and Kotlin, designed to process notification data and automate tasks.',
+    'sobdm-project': 'A Multilayer Perceptron (MLP) model to predict arrival delays for Seongnam-si City Bus Route 109.',
+    'ConvDDI': 'A Convolutional Neural Network (CNN) model for detecting drug-to-drug interactions.',
+    'junho.art': 'A personal responsive portfolio website built with HTML, CSS, and JavaScript to showcase developer logs.'
 };
 
 // 기본 프로젝트 목록 (JSON 생성 전 또는 연동 실패 시 Fallback으로 표시할 고정 정보)
 const DEFAULT_PROJECTS = [
     {
         name: 'Magnolia',
-        description: '일상 생활에 편리함을 더해주는 똑똑한 카카오톡 봇 프로젝트 입니다. Go, Rust, kotlin기반으로 제작했어요.',
+        description: PROJECT_DESCRIPTIONS['Magnolia'],
         url: 'https://github.com/4season/Magnolia',
         image: PROJECT_IMAGES['Magnolia'],
         tags: ['Go', 'Rust', 'Kotlin', 'API', 'Chatbot']
     },
     {
         name: 'sobdm-project',
-        description: 'Seongnam-si 109 Bus Delay Prediction Model using Multilayer Perceptron (MLP)',
+        description: PROJECT_DESCRIPTIONS['sobdm-project'],
         url: 'https://github.com/4season/sobdm-project',
         image: PROJECT_IMAGES['sobdm-project'],
         tags: ['Python', 'Machine-Learning', 'MLP']
     },
     {
         name: 'ConvDDI',
-        description: 'Convolutional Neural Network for Drug–Drug Interaction Detection',
+        description: PROJECT_DESCRIPTIONS['ConvDDI'],
         url: 'https://github.com/4season/ConvDDI',
         image: PROJECT_IMAGES['ConvDDI'],
         tags: ['Python', 'Deep-Learning', 'CNN']
     },
     {
         name: '포트폴리오 웹사이트',
-        description: '저를 소개하기 위해 만든 첫 번째 웹사이트입니다. HTML, CSS, JavaScript로 제작했어요.',
+        description: PROJECT_DESCRIPTIONS['junho.art'],
         url: 'https://github.com/4season/junho.art',
         image: PROJECT_IMAGES['junho.art'],
         tags: ['HTML', 'CSS', 'JavaScript']
@@ -124,12 +132,15 @@ async function loadGitHubProjects() {
                 image = `https://opengraph.githubassets.com/1/4season/${repo.name}`;
             }
 
+            // 설명 영어 통일 및 매핑 (로컬 매핑 테이블에 영어 설명이 지정되어 있다면 우선 채움)
+            const description = PROJECT_DESCRIPTIONS[repo.name] || repo.description;
+
             // 한글 명칭 특별 맵핑 (junho.art인 경우 화면에 포트폴리오 웹사이트로 표시)
             const displayName = repo.name === 'junho.art' ? '포트폴리오 웹사이트' : repo.name;
 
             return {
                 name: displayName,
-                description: repo.description,
+                description: description,
                 url: repo.url,
                 image: image,
                 tags: tags
