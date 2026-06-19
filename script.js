@@ -107,7 +107,8 @@ function renderProjects(projects) {
 // GitHub API를 통해 실시간 데이터를 가져오는 비동기 함수
 async function loadGitHubProjects() {
     try {
-        const response = await fetch(LOCAL_JSON_URL);
+        // 캐시 방지를 위해 타임스탬프 쿼리 매개변수를 추가하여 매번 최신 데이터를 받아오도록 합니다.
+        const response = await fetch(`${LOCAL_JSON_URL}?t=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`정적 JSON 파일 읽기 실패 (상태 코드: ${response.status})`);
         }
