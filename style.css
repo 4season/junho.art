@@ -784,5 +784,48 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     }
 }
 
+/* 실시간 현재 위치 노드 스타일 */
+.timeline-now-node {
+    position: relative;
+    width: 100%;
+    clear: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.2rem 0;
+    z-index: 15;
+}
+.now-badge {
+    background: linear-gradient(135deg, var(--accent-green) 0%, #8c7fb3 100%);
+    color: white;
+    padding: 0.5rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(140, 127, 179, 0.4);
+    border: 2px solid white;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: now-pulse 2s infinite alternate ease-in-out;
+}
+@keyframes now-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(140, 127, 179, 0.4);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(140, 127, 179, 0.6), 0 0 10px rgba(134, 179, 127, 0.5);
+    }
+}
+@media (max-width: 768px) {
+    .timeline-now-node {
+        justify-content: flex-start;
+        padding-left: 5rem;
+        margin: 1.5rem 0;
+    }
+}
+
 
 

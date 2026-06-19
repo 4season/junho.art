@@ -172,11 +172,13 @@ async function loadGitHubProjects() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         loadGitHubProjects();
+        updateTimelineNowNode();
         // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
         setInterval(loadGitHubProjects, 300000);
     });
 } else {
     loadGitHubProjects();
+    updateTimelineNowNode();
     // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
     setInterval(loadGitHubProjects, 300000);
 }
@@ -219,6 +221,18 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initScrollRevealFallback);
 } else {
     initScrollRevealFallback();
+}
+
+// 여정 타임라인의 현재 시점 실시간 업데이트 함수
+function updateTimelineNowNode() {
+    const nowBadge = document.querySelector('.timeline-now-node .now-badge');
+    if (!nowBadge) return;
+    
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // 0-indexed
+    
+    nowBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs fa-spin"></i> 현재 여정 (${year}년 ${month}월)`;
 }
 
 
