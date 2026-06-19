@@ -1,0 +1,26 @@
+# https://junho.art/robots.txt
+
+User-agent: *
+Allow: /
+
+# AI 학습 및 정보 무단 수집 봇 차단 (개인 정보 보호)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
