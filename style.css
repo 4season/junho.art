@@ -839,5 +839,19 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     }
 }
 
+/* 활성화된 타임라인 노드 및 카드 스타일 */
+.timeline-dot.active {
+    background-color: var(--accent-green) !important;
+    color: white !important;
+    border-color: var(--accent-green) !important;
+    box-shadow: 0 0 14px rgba(134, 179, 127, 0.7) !important;
+    transform: scale(1.15);
+}
+.timeline-item.active .timeline-content {
+    border-color: rgba(134, 179, 127, 0.45) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    box-shadow: 0 10px 30px rgba(134, 179, 127, 0.08) !important;
+}
+
 
 

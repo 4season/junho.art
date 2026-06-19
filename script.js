@@ -90,8 +90,8 @@ function renderProjects(projects) {
             .map(tag => `<span>${tag}</span>`)
             .join('\n                        ');
 
-        // Magnolia 프로젝트에 라이브 상태(미완성/진행중) 표시 배지 추가
-        const isLive = project.name === 'Magnolia';
+        // Magnolia 및 포트폴리오 웹사이트 프로젝트에 라이브 상태(미완성/진행중) 표시 배지 추가
+        const isLive = project.name === 'Magnolia' || project.name === 'Portfolio Website' || project.name === 'junho.art';
         const liveBadgeHTML = isLive 
             ? `<span class="live-indicator-badge"><span class="live-dot"></span>In Progress</span>` 
             : '';
@@ -241,6 +241,7 @@ function updateTimelineNowNode() {
 function updateTimelineProgress() {
     const timeline = document.querySelector('.timeline');
     const progressLine = document.querySelector('.timeline-line-progress');
+    const nowNode = document.querySelector('.timeline-now-node');
     if (!timeline || !progressLine) return;
     
     const rect = timeline.getBoundingClientRect();
@@ -257,10 +258,37 @@ function updateTimelineProgress() {
         progress = (scrolled / timelineHeight) * 100;
     }
     
-    // 0% ~ 100% 범위 제한
-    progress = Math.max(0, Math.min(100, progress));
+    // 현재 여정 노드(nowNode)가 존재할 경우, 선이 이 노드를 초과하여 나아가지 못하게 제한
+    if (nowNode) {
+        const nowNodeRect = nowNode.getBoundingClientRect();
+        const nowNodeOffsetTop = nowNodeRect.top - rect.top + (nowNodeRect.height / 2);
+        const maxProgress = (nowNodeOffsetTop / timelineHeight) * 100;
+        
+        progress = Math.min(progress, maxProgress);
+    }
     
+    progress = Math.max(0, Math.min(100, progress));
     progressLine.style.height = `${progress}%`;
+    
+    // 프로그래스바 높이에 도달한 타임라인 노드(Dot)들을 활성화
+    const progressHeight = (progress / 100) * timelineHeight;
+    const items = document.querySelectorAll('.timeline-item');
+    
+    items.forEach(item => {
+        const dot = item.querySelector('.timeline-dot');
+        if (!dot) return;
+        
+        // 아이템의 top 좌표에 40px(점의 세로 중간값)을 더해 판정 높이 계산
+        const itemY = item.offsetTop + 40; 
+        
+        if (progressHeight >= itemY) {
+            dot.classList.add('active');
+            item.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+            item.classList.remove('active');
+        }
+    });
 }
 
 // 스크롤 및 브라우저 크기 변경 리스너 등록
