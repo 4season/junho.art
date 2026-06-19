@@ -32,7 +32,8 @@ const PROJECT_IMAGES = {
     'Magnolia': './img/IMG_8978.jpg',
     'sobdm-project': 'https://images.unsplash.com/photo-1557223562-6c77ef16210f?q=80&w=800', // 성남시 109번 마을버스와 유사한 한국식 초록색 버스 이미지
     'ConvDDI': 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=800',     // 약물 상호작용 관련 알약/의약 이미지
-    'junho.art': 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800'     // 포트폴리오 웹사이트 이미지
+    'junho.art': './img/portfolio_preview.png',                                               // 포트폴리오 웹사이트 이미지
+    'TrendXiv': './img/trendxiv_preview.png'                                                  // 트렌드 예측 프로젝트 이미지
 };
 
 // 가독성을 위한 프로젝트별 영문 설명 매핑 테이블 (GitHub 설명보다 우선 반영됨)
@@ -40,7 +41,8 @@ const PROJECT_DESCRIPTIONS = {
     'Magnolia': 'An intelligent KakaoTalk chatbot built with Go, Rust, and Kotlin, designed to process notification data and automate tasks.',
     'sobdm-project': 'A Multilayer Perceptron (MLP) model to predict arrival delays for Seongnam-si City Bus Route 109.',
     'ConvDDI': 'A Convolutional Neural Network (CNN) model for detecting drug-to-drug interactions.',
-    'junho.art': 'A personal responsive portfolio website built with HTML, CSS, and JavaScript to showcase developer logs.'
+    'junho.art': 'A personal responsive portfolio website built with HTML, CSS, and JavaScript to showcase developer logs.',
+    'TrendXiv': 'A machine learning system that predicts academic research trends on arXiv using Principal Component Analysis (PCA) and classifier models.'
 };
 
 // 기본 프로젝트 목록 (JSON 생성 전 또는 연동 실패 시 Fallback으로 표시할 고정 정보)
@@ -159,9 +161,15 @@ async function loadGitHubProjects() {
 
 // DOM이 완전히 로드되었는지 확인하고 GitHub 프로젝트 로딩 시작
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+    document.addEventListener('DOMContentLoaded', () => {
+        loadGitHubProjects();
+        // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
+        setInterval(loadGitHubProjects, 300000);
+    });
 } else {
-    loadGitHubProjects(); // Cloudflare Rocket Loader 등으로 인해 이미 로드가 완료된 경우 즉시 실행
+    loadGitHubProjects();
+    // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
+    setInterval(loadGitHubProjects, 300000);
 }
 
 // === CSS view-timeline 미지원 브라우저용 스크롤 리빌 폴백 ===
