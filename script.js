@@ -173,12 +173,14 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         loadGitHubProjects();
         updateTimelineNowNode();
+        updateTimelineProgress();
         // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
         setInterval(loadGitHubProjects, 300000);
     });
 } else {
     loadGitHubProjects();
     updateTimelineNowNode();
+    updateTimelineProgress();
     // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
     setInterval(loadGitHubProjects, 300000);
 }
@@ -234,5 +236,35 @@ function updateTimelineNowNode() {
     
     nowBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs fa-spin"></i> 현재 여정 (${year}년 ${month}월)`;
 }
+
+// 타임라인 스크롤 프로그래스바 업데이트 함수
+function updateTimelineProgress() {
+    const timeline = document.querySelector('.timeline');
+    const progressLine = document.querySelector('.timeline-line-progress');
+    if (!timeline || !progressLine) return;
+    
+    const rect = timeline.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // 타임라인 시작점이 화면 80%에 걸릴 때부터 진행률 업데이트 시작
+    const timelineHeight = rect.height;
+    const startY = windowHeight * 0.8;
+    const currentY = rect.top;
+    
+    let progress = 0;
+    if (currentY < startY) {
+        const scrolled = startY - currentY;
+        progress = (scrolled / timelineHeight) * 100;
+    }
+    
+    // 0% ~ 100% 범위 제한
+    progress = Math.max(0, Math.min(100, progress));
+    
+    progressLine.style.height = `${progress}%`;
+}
+
+// 스크롤 및 브라우저 크기 변경 리스너 등록
+window.addEventListener('scroll', updateTimelineProgress);
+window.addEventListener('resize', updateTimelineProgress);
 
 
