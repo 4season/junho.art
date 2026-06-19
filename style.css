@@ -735,5 +735,54 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     text-decoration: underline;
 }
 
+/* 라이브 프로젝트 인디케이터 배지 스타일 */
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    width: 100%;
+}
+.project-card h3 {
+    margin-bottom: 0 !important;
+}
+.live-indicator-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: rgba(134, 179, 127, 0.12); /* 연한 포인트 녹색 배경 */
+    color: var(--accent-green);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(134, 179, 127, 0.25);
+    white-space: nowrap;
+}
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(134, 179, 127, 0.7);
+    animation: live-pulse 1.8s infinite;
+}
+@keyframes live-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(134, 179, 127, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(134, 179, 127, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(134, 179, 127, 0);
+    }
+}
+
 
 

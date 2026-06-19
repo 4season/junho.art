@@ -90,11 +90,20 @@ function renderProjects(projects) {
             .map(tag => `<span>${tag}</span>`)
             .join('\n                        ');
 
+        // Magnolia 프로젝트에 라이브 상태(미완성/진행중) 표시 배지 추가
+        const isLive = project.name === 'Magnolia';
+        const liveBadgeHTML = isLive 
+            ? `<span class="live-indicator-badge"><span class="live-dot"></span>In Progress</span>` 
+            : '';
+
         // 카드 컴포넌트 마크업 생성 (기존 디자인 및 클래스 구조 그대로 유지)
         htmlContent += `
                 <div class="project-card glass-card">
                     <img src="${project.image}" alt="${project.name} 프로젝트 이미지">
-                    <h3>${project.name}</h3>
+                    <div class="project-card-header">
+                        <h3>${project.name}</h3>
+                        ${liveBadgeHTML}
+                    </div>
                     <p>${project.description || 'GitHub 프로젝트 상세 설명이 제공되지 않았습니다.'}</p>
                     <div class="tags">
                         ${tagsHTML}
