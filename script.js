@@ -74,6 +74,13 @@ const DEFAULT_PROJECTS = [
         url: 'https://github.com/4season/junho.art',
         image: PROJECT_IMAGES['junho.art'],
         tags: ['HTML', 'CSS', 'JavaScript']
+    },
+    {
+        name: 'TrendXiv',
+        description: PROJECT_DESCRIPTIONS['TrendXiv'],
+        url: 'https://github.com/4season/TrendXiv',
+        image: PROJECT_IMAGES['TrendXiv'],
+        tags: ['Python', 'Machine-Learning', 'Data-Analysis']
     }
 ];
 
