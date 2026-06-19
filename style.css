@@ -306,6 +306,20 @@ header {
     z-index: 2;
     transition: height 0.15s ease-out;
 }
+.timeline-line-progress::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-green);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(134, 179, 127, 0.85);
+    z-index: 5;
+}
 .timeline-item {
     padding: 1.5rem 0;
     position: relative;
