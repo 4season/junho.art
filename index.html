@@ -3,6 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- 브라우저 언어 자동 감지 및 리다이렉션 스크립트 (세션스토리지를 통해 최초 1회만 판별하여 무한 루프 방지) -->
+    <script>
+        (function() {
+            if (sessionStorage.getItem('lang-redirect-checked')) {
+                // 이미 세션 내에서 체크를 완료한 경우, 현재 수동 접속 페이지를 존중하여 설정을 동기화하고 리다이렉트 생략
+                localStorage.setItem('user-language', 'ko');
+                return;
+            }
+            
+            const savedLang = localStorage.getItem('user-language');
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // 세션 체크 완료 플래그 설정
+            sessionStorage.setItem('lang-redirect-checked', 'true');
+            
+            if (savedLang === 'en') {
+                window.location.replace('index_en.html' + window.location.hash);
+            } else if (savedLang === 'ko') {
+                // 한국어 페이지 유지
+            } else if (browserLang && !browserLang.toLowerCase().startsWith('ko')) {
+                localStorage.setItem('user-language', 'en');
+                window.location.replace('index_en.html' + window.location.hash);
+            } else {
+                localStorage.setItem('user-language', 'ko');
+            }
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junho Heo | Undergraduate Researcher</title>
     <link rel="stylesheet" href="style.css">
@@ -39,6 +66,11 @@
         <a href="#skills">역량 및 계획</a>
         <a href="#projects">프로젝트</a>
         <a href="https://github.com/4season" target="_blank">GitHub</a>
+        <div class="mobile-lang-toggle" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; gap: 1rem; font-size: 1.1rem; font-weight: 700;">
+            <span style="color: var(--heading-color);">KO</span>
+            <span style="opacity: 0.3;">|</span>
+            <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" style="color: var(--text-color); text-decoration: none;">EN</a>
+        </div>
     </div>
 
     <!-- 헤더 영역 -->
@@ -50,8 +82,13 @@
                 <a href="#journey">여정</a>
                 <a href="#skills">역량 및 계획</a>
                 <a href="#projects">프로젝트</a>
-                <a href="https://github.com/4season" target="_blank">GitHub <i
+                <a href="https://github.com/4season" target="_blank" style="margin-right: 1.5rem;">GitHub <i
                         class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <span class="lang-toggle-container" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border-color); padding: 0.2rem 0.6rem; border-radius: 20px; background-color: rgba(255,255,255,0.5);">
+                    <span style="color: var(--heading-color);">KO</span>
+                    <span style="opacity: 0.3;">|</span>
+                    <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" style="color: var(--text-color); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-color)'">EN</a>
+                </span>
             </nav>
             <button class="menu-btn" id="menuBtn">
                 <i class="fa-solid fa-bars"></i>
@@ -164,16 +201,16 @@
                     </div>
                 </div>
 
-                <!-- 타임라인 아이템 6: 뇌신경과학 & 데이터 공학 연구실 인턴십 -->
+                <!-- 타임라인 아이템 6: Brain-AI Interface (BAI) lab 학부연구생 -->
                 <div class="timeline-item right">
                     <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Research | 2026 Summer ~ Present</span>
-                            <span class="timeline-tag proj-tag">연구 인턴</span>
+                            <span class="timeline-tag proj-tag">학부연구생</span>
                         </div>
-                        <h3>뇌신경과학 & 데이터 공학 연구실 학부 연구원 인턴</h3>
-                        <p>뇌신경과학과 데이터 공학을 융합하는 연구실에 학부 인턴으로 참여하여, 초기 연구 인프라 세팅 및 뉴럴 데이터 파이프라인의 기초 전처리를 탐색하고 있습니다. 실무 연구
+                        <h3>Brain-AI Interface (BAI) lab 학부연구생</h3>
+                        <p>Brain-AI Interface (BAI) lab에 학부연구생으로 참여하여, 초기 연구 인프라 세팅 및 뉴럴 데이터 파이프라인의 기초 전처리를 탐색하고 있습니다. 실무 연구
                             현장을 경험하며 향후 목표인 <strong>계산정신의학(Computational Psychiatry)</strong> 분야의 연구 기초를 다져가고 있습니다.</p>
                     </div>
                 </div>
@@ -206,9 +243,8 @@
                             <span class="timeline-date">Future Roadmap | 대학원 진학</span>
                             <span class="timeline-tag future-tag">연구 계획</span>
                         </div>
-                        <h3>계산정신의학 연구를 위한 배움의 도약</h3>
-                        <p>학부 수준을 넘어 본격적인 뇌-인지 분석을 위해 fMRI 뇌영상 처리, 생체 신경망(SNN) 모델링, 생체 정보 프라이버시를 지키는 암호화 보안 알고리즘을 대학원에서
-                            한층 전문적으로 깊게 배워갈 로드맵을 지니고 있습니다.</p>
+                        <h3>뇌신경망 데이터와 AI 융합 연구로의 도약</h3>
+                        <p>대학원에서 Brain-AI Interface 및 계산정신의학에 초점을 맞춰, 뇌파(EEG) 및 fMRI 등 뇌신경 데이터 분석을 위한 AI 계산 모델링 연구를 심도 있게 진행하고자 합니다. 임상 현장의 치료적 진단 보조 인프라를 설계하는 것을 핵심 연구 목표로 삼고 있습니다.</p>
                     </div>
                 </div>
             </div>
@@ -239,12 +275,11 @@
                     <h3>Research & Future Focus</h3>
                     <p class="card-sub">앞으로 전문적으로 배우고자 하는 핵심 도메인</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 기초 신경과학(Neuroscience) 및 의학(Medicine) 도메인 학습
-                        </li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> fMRI 뇌영상 이미지 및 신경신호 데이터 처리</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 생체 신경망(SNN) 구조 모델링 및 시뮬레이션</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 환자 맞춤형 정량 복약 제약 시뮬레이터 개발</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 민감 의료/생체 데이터 보호를 위한 암호화 알고리즘</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 기초 신경과학(Neuroscience) 및 의학(Medicine) 도메인 학습</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> EEG/fMRI 기반 뇌신경 신호 데이터 전처리 및 분석 기술</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 계산정신의학 관점의 질환 예측 및 AI 계산 모델 고도화</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 실시간 뇌-컴퓨터 인터페이스(BCI) 데이터 파이프라인 설계</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 헬스케어 및 생체 정보 취급을 위한 의료 보안 데이터 전송</li>
                     </ul>
                 </div>
             </div>
@@ -275,8 +310,11 @@
                 style="color: inherit; text-decoration: underline;">All Rights Reserved</a>.
         </p>
         <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">
-            <i class="fa-solid fa-envelope"></i> Contact: <a href="mailto:junho.art@outlook.com"
-                style="color: inherit; text-decoration: underline;">junho.art@outlook.com</a>
+            <i class="fa-solid fa-envelope"></i> Contact: <a href="mailto:contact@junho.art"
+                style="color: inherit; text-decoration: underline;">contact@junho.art</a>
+            <span style="margin: 0 10px; opacity: 0.5;">|</span>
+            <i class="fa-solid fa-id-card"></i> <a href="./signature.html"
+                style="color: inherit; text-decoration: underline;">명함 & 서명 생성기</a>
         </p>
     </footer>
 

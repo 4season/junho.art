@@ -1,4 +1,5 @@
 // DOM 요소들을 가져옵니다.
+const isEnglish = document.documentElement.lang === 'en';
 const menuBtn = document.getElementById('menuBtn');
 const closeBtn = document.getElementById('closeBtn');
 const navDrawer = document.getElementById('navDrawer');
@@ -104,18 +105,22 @@ function renderProjects(projects) {
             : '';
 
         // 카드 컴포넌트 마크업 생성 (기존 디자인 및 클래스 구조 그대로 유지)
+        const altText = isEnglish ? `${project.name} Project Image` : `${project.name} 프로젝트 이미지`;
+        const fallbackDesc = isEnglish ? 'No detailed description provided on GitHub.' : 'GitHub 프로젝트 상세 설명이 제공되지 않았습니다.';
+        const viewLinkText = isEnglish ? 'View Details' : '자세히 보기';
+
         htmlContent += `
                 <div class="project-card glass-card">
-                    <img src="${project.image}" alt="${project.name} 프로젝트 이미지">
+                    <img src="${project.image}" alt="${altText}">
                     <div class="project-card-header">
                         <h3>${project.name}</h3>
                         ${liveBadgeHTML}
                     </div>
-                    <p>${project.description || 'GitHub 프로젝트 상세 설명이 제공되지 않았습니다.'}</p>
+                    <p>${project.description || fallbackDesc}</p>
                     <div class="tags">
                         ${tagsHTML}
                     </div>
-                    <a href="${project.url}" class="project-link" target="_blank">자세히 보기 &rarr;</a>
+                    <a href="${project.url}" class="project-link" target="_blank">${viewLinkText} &rarr;</a>
                 </div>`;
     });
 
@@ -167,11 +172,14 @@ async function loadGitHubProjects() {
         });
 
         renderProjects(projects);
-        
+        isTimelineLayoutCached = false;
+        updateTimelineProgress();
     } catch (error) {
         console.warn('GitHub Pinned 연동 실패 (서버 생성 전이거나 오류), 기본 캐시 데이터로 표시합니다:', error);
         // JSON 로드 에러 시 기존 캐시 데이터 렌더링 (안전장치)
         renderProjects(DEFAULT_PROJECTS);
+        isTimelineLayoutCached = false;
+        updateTimelineProgress();
     }
 }
 
@@ -241,7 +249,41 @@ function updateTimelineNowNode() {
     const year = today.getFullYear();
     const month = today.getMonth() + 1; // 0-indexed
     
-    nowBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs fa-spin"></i> 현재 여정 (${year}년 ${month}월)`;
+    if (isEnglish) {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const engMonth = monthNames[today.getMonth()];
+        nowBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs fa-spin"></i> Current Journey (${engMonth} ${year})`;
+    } else {
+        nowBadge.innerHTML = `<i class="fa-solid fa-location-crosshairs fa-spin"></i> 현재 여정 (${year}년 ${month}월)`;
+    }
+}
+
+// 타임라인 좌표 및 높이를 캐시하여 스크롤 성능 향상 (레이아웃 스래싱 방지)
+let cachedTimelinePageTop = 0;
+let cachedTimelineHeight = 0;
+let cachedNowNodeOffsetTop = 0;
+let isTimelineLayoutCached = false;
+
+function cacheTimelineLayout() {
+    const timeline = document.querySelector('.timeline');
+    const nowNode = document.querySelector('.timeline-now-node');
+    if (!timeline) return;
+
+    // 절대 페이지 탑 좌표 계산
+    let top = 0;
+    let el = timeline;
+    while (el) {
+        top += el.offsetTop;
+        el = el.offsetParent;
+    }
+    cachedTimelinePageTop = top;
+    cachedTimelineHeight = timeline.offsetHeight;
+
+    if (nowNode) {
+        // .timeline-now-node의 offsetTop은 부모인 .timeline 기준
+        cachedNowNodeOffsetTop = nowNode.offsetTop + (nowNode.offsetHeight / 2);
+    }
+    isTimelineLayoutCached = true;
 }
 
 // 타임라인 스크롤 프로그래스바 업데이트 함수
@@ -251,44 +293,43 @@ function updateTimelineProgress() {
     const nowNode = document.querySelector('.timeline-now-node');
     if (!timeline || !progressLine) return;
     
-    const rect = timeline.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
+    // 캐시가 유효하지 않으면 갱신
+    if (!isTimelineLayoutCached) {
+        cacheTimelineLayout();
+    }
     
-    // 타임라인 시작점이 화면 80%에 걸릴 때부터 진행률 업데이트 시작
-    const timelineHeight = rect.height;
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const windowHeight = window.innerHeight;
     const startY = windowHeight * 0.8;
-    const currentY = rect.top;
     
     let progress = 0;
-    if (currentY < startY) {
-        const scrolled = startY - currentY;
-        progress = (scrolled / timelineHeight) * 100;
+    // 타임라인 시작점이 화면 80%에 걸릴 때부터 진행률 업데이트 시작
+    if (scrollTop + startY > cachedTimelinePageTop) {
+        const scrolled = (scrollTop + startY) - cachedTimelinePageTop;
+        progress = (scrolled / cachedTimelineHeight) * 100;
     }
     
     // 현재 여정 노드(nowNode)가 존재할 경우, 선이 이 노드를 초과하여 나아가지 못하게 제한
-    if (nowNode) {
-        const nowNodeRect = nowNode.getBoundingClientRect();
-        const nowNodeOffsetTop = nowNodeRect.top - rect.top + (nowNodeRect.height / 2);
-        const maxProgress = (nowNodeOffsetTop / timelineHeight) * 100;
-        
+    if (nowNode && cachedNowNodeOffsetTop > 0) {
+        const maxProgress = (cachedNowNodeOffsetTop / cachedTimelineHeight) * 100;
         progress = Math.min(progress, maxProgress);
     }
     
     progress = Math.max(0, Math.min(100, progress));
     progressLine.style.height = `${progress}%`;
-    
-    // 프로그래스바 높이에 도달한 타임라인 노드(Dot)들을 활성화
-    const progressHeight = (progress / 100) * timelineHeight;
+    const progressHeight = (progress / 100) * cachedTimelineHeight;
     const items = document.querySelectorAll('.timeline-item');
-    
-    items.forEach(item => {
+
+    items.forEach((item, index) => {
         const dot = item.querySelector('.timeline-dot');
         if (!dot) return;
         
         // 아이템의 top 좌표에 40px(점의 세로 중간값)을 더해 판정 높이 계산
         const itemY = item.offsetTop + 40; 
         
-        if (progressHeight >= itemY) {
+        const isActive = progressHeight >= itemY;
+        
+        if (isActive) {
             dot.classList.add('active');
             item.classList.add('active');
         } else {
@@ -300,6 +341,20 @@ function updateTimelineProgress() {
 
 // 스크롤 및 브라우저 크기 변경 리스너 등록
 window.addEventListener('scroll', updateTimelineProgress);
-window.addEventListener('resize', updateTimelineProgress);
+
+let lastWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+    // 모바일 스크롤 시 주소창 여닫힘에 따른 높이(height) 단독 변화 시의 레이아웃 재계산(스래싱) 방지
+    if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        isTimelineLayoutCached = false; // 가로 크기가 변경되었을 때만 캐시 무효화
+        updateTimelineProgress();
+    }
+});
+
+window.addEventListener('load', () => {
+    isTimelineLayoutCached = false; // 이미지/폰트 등 모든 리소스 로드 시 캐시 무효화
+    updateTimelineProgress();
+});
 
 

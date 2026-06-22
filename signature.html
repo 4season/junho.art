@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Signature & Business Card | junho.art</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 아이콘 라이브러리 (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- 'Gowun Dodum' 폰트 불러오기 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- 파비콘 설정 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+</head>
+
+<body>
+
+    <!-- 배경 애니메이션 블롭 -->
+    <div class="bg-blob-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- 헤더 영역 -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-arrow-left" style="font-size: 1.1rem; margin-right: 0.5rem;"></i> junho.art</a>
+            <nav class="desktop-nav">
+                <a href="index.html#about">소개</a>
+                <a href="index.html#journey">여정</a>
+                <a href="index.html#skills">역량 및 계획</a>
+                <a href="index.html#projects">프로젝트</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <section class="section" style="padding-top: 4rem;">
+            <h2><i class="fa-solid fa-id-card"></i> 명함 & 서명 생성기</h2>
+            <p class="section-desc">포트폴리오의 디자인 테마에 맞춘 이메일 서명(HTML)과 디지털 명함(PNG 이미지)을 실시간으로 설정하고 생성합니다.</p>
+
+            <div class="sig-builder-grid">
+                <!-- 왼쪽: 설정 폼 -->
+                <div class="sig-form-card glass-card">
+                    <h3 style="color: var(--heading-color); font-size: 1.3rem; margin-bottom: 1.5rem; font-weight: 700; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;">
+                        <i class="fa-solid fa-sliders"></i> 서명 및 명함 정보 설정
+                    </h3>
+
+                    <!-- 이름 설정 -->
+                    <div class="sig-input-group">
+                        <label for="inputNameKo">이름 (한글)</label>
+                        <input type="text" id="inputNameKo" value="허준호" placeholder="예: 홍길동">
+                    </div>
+                    <div class="sig-input-group">
+                        <label for="inputNameEn">이름 (영문)</label>
+                        <input type="text" id="inputNameEn" value="Junho Heo" placeholder="예: Gildong Hong">
+                    </div>
+
+                    <!-- 소속 및 직책 -->
+                    <div class="sig-input-group">
+                        <label for="inputTitle">직함 / 역할</label>
+                        <input type="text" id="inputTitle" value="학부연구생" placeholder="예: 학부연구생, 백엔드 엔지니어">
+                    </div>
+                    <div class="sig-input-group">
+                        <label for="inputSubTitle">영문 직함</label>
+                        <input type="text" id="inputSubTitle" value="Undergraduate Researcher" placeholder="예: Software Engineer">
+                    </div>
+                    <div class="sig-input-group">
+                        <label for="inputDept">소속 학과 / 조직</label>
+                        <input type="text" id="inputDept" value="백석대학교 컴퓨터학부" placeholder="예: 백석대학교 컴퓨터학부">
+                    </div>
+
+                    <!-- 이메일 선택 (비즈니스 메일 및 별칭 지원) -->
+                    <div class="sig-input-group">
+                        <label for="selectEmail">이메일 주소</label>
+                        <select id="selectEmail">
+                            <option value="junho@junho.art" selected>junho@junho.art (기본)</option>
+                            <option value="contact@junho.art">contact@junho.art (별칭)</option>
+                            <option value="me@junho.art">me@junho.art (별칭)</option>
+                            <option value="heo@junho.art">heo@junho.art (별칭)</option>
+                            <option value="junho.art@outlook.com">junho.art@outlook.com (아웃룩)</option>
+                            <option value="custom">직접 입력...</option>
+                        </select>
+                    </div>
+                    <div class="sig-input-group" id="customEmailGroup" style="display: none;">
+                        <label for="inputCustomEmail">직접 입력 이메일</label>
+                        <input type="email" id="inputCustomEmail" placeholder="example@domain.com">
+                    </div>
+
+                    <!-- 연락처 정보 -->
+                    <div class="sig-input-group">
+                        <label for="inputGithub">GitHub URL</label>
+                        <input type="url" id="inputGithub" value="https://github.com/4season">
+                    </div>
+                    <div class="sig-input-group">
+                        <label for="inputWebsite">포트폴리오 주소</label>
+                        <input type="url" id="inputWebsite" value="https://junho.art">
+                    </div>
+
+                    <!-- 연구 분야 -->
+                    <div class="sig-input-group">
+                        <label for="inputResearch">연구/기술 관심사</label>
+                        <input type="text" id="inputResearch" value="계산정신의학 (Computational Psychiatry) & 백엔드 아키텍처" placeholder="예: 인공지능, 뇌신경과학">
+                    </div>
+
+                    <!-- 프로필 이미지 URL -->
+                    <div class="sig-input-group">
+                        <label for="inputProfileUrl">프로필 이미지 URL</label>
+                        <input type="text" id="inputProfileUrl" value="./img/junho_profile.jpg" placeholder="웹에 업로드된 이미지 주소">
+                        <p style="font-size: 0.75rem; color: #a59397; margin-top: 4px; line-height: 1.4;">
+                            <i class="fa-solid fa-circle-info"></i> 이메일 서명 수신자가 정상적으로 이미지를 보려면 웹사이트 도메인 주소가 포함된 절대 주소(예: <code>https://junho.art/img/junho_profile.jpg</code> 또는 <code>https://github.com/4season.png</code>)를 사용하는 것이 좋습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 실시간 미리보기 및 작업 -->
+                <div class="sig-card-preview-wrap">
+                    
+                    <!-- 1. 이메일 서명 미리보기 -->
+                    <div class="sig-preview-section">
+                        <h3><i class="fa-solid fa-envelope-open-text"></i> 이메일 서명 미리보기 (HTML)</h3>
+                        <div class="sig-preview-box" style="background-color: #ffffff;">
+                            <!-- 복사를 위한 소스 영역 -->
+                            <div id="signature-preview-html-source">
+                                <!-- 이메일 클라이언트 호환성을 극대화한 인라인 스타일 테이블 -->
+                                <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Gowun Dodum', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #594a4e; font-size: 14px; line-height: 1.6; max-width: 500px; border-collapse: collapse; text-align: left;">
+                                    <tr>
+                                        <!-- 프로필 이미지 -->
+                                        <td valign="top" style="padding-right: 18px; width: 85px; vertical-align: top;">
+                                            <img id="sigPreviewImg" src="https://github.com/4season.png" alt="Profile" width="80" height="100" style="border-radius: 8px; border: 2px solid #b37f8c; display: block; object-fit: cover; background-color: #f7f3f5; width: 80px; height: 100px;" />
+                                        </td>
+                                        <!-- 수직 구분선 -->
+                                        <td style="border-left: 2px solid #f2e8ea; padding-right: 18px; width: 1px; vertical-align: stretch;"></td>
+                                        <!-- 정보 영역 -->
+                                        <td valign="middle" style="vertical-align: middle;">
+                                            <div style="font-size: 17px; font-weight: bold; color: #b37f8c; margin-bottom: 2px; letter-spacing: 0.5px;">
+                                                <span id="sigPreviewNameKo">허준호</span> 
+                                                <span id="sigPreviewNameEn" style="font-size: 12px; font-weight: bold; color: #86b37f; margin-left: 6px;">Junho Heo</span>
+                                            </div>
+                                            <div style="font-size: 12px; font-weight: bold; color: #594a4e; margin-bottom: 6px;">
+                                                <span id="sigPreviewDept">백석대학교 컴퓨터학부</span> | <span id="sigPreviewTitle" style="color: #8c7fb3;">학부연구생</span>
+                                            </div>
+                                            <div id="sigPreviewResearchBox" style="font-size: 11px; color: #776a6e; line-height: 1.4; margin-bottom: 8px; border-bottom: 1px dashed #f2e8ea; padding-bottom: 6px;">
+                                                관심 분야: <span id="sigPreviewResearch">계산정신의학 (Computational Psychiatry) & 백엔드 아키텍처</span>
+                                            </div>
+                                            <!-- 연락처 목록 -->
+                                            <table cellpadding="0" cellspacing="0" border="0" style="font-size: 11px; color: #776a6e; line-height: 1.5;">
+                                                <tr>
+                                                    <td style="padding-bottom: 2px;">
+                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">Email</strong> 
+                                                        <a id="sigPreviewEmailLink" href="mailto:junho@junho.art" style="color: #594a4e; text-decoration: none; font-weight: 500;"><span id="sigPreviewEmail">junho@junho.art</span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 2px;">
+                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">GitHub</strong> 
+                                                        <a id="sigPreviewGithubLink" href="https://github.com/4season" target="_blank" style="color: #594a4e; text-decoration: none;"><span id="sigPreviewGithub">github.com/4season</span></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">Website</strong> 
+                                                        <a id="sigPreviewWebLink" href="https://junho.art" target="_blank" style="color: #86b37f; text-decoration: none; font-weight: bold;"><span id="sigPreviewWeb">junho.art</span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="sig-btn-wrap">
+                            <button class="sig-btn sig-btn-primary" id="btnCopySignature">
+                                <i class="fa-solid fa-copy"></i> 서명 클립보드 복사
+                            </button>
+                        </div>
+                        <p style="font-size: 0.8rem; color: #887a7d; margin-top: 8px; line-height: 1.4;">
+                            <i class="fa-solid fa-lightbulb" style="color: #e6b800;"></i> 복사 버튼을 누른 후 메일 설정(Gmail, Outlook, 애플 메일 등)의 <strong>서명 설정창에 붙여넣기(Cmd+V / Ctrl+V)</strong> 하시면 서식과 로고가 그대로 적용됩니다.
+                        </p>
+                    </div>
+
+                    <!-- 2. 실물 명함 이미지 생성 미리보기 -->
+                    <div class="sig-preview-section" style="margin-top: 1rem;">
+                        <h3><i class="fa-solid fa-address-card"></i> 디지털 명함 미리보기 (Physical Card Style)</h3>
+                        
+                        <div class="business-card-viewport">
+                            <!-- 앞면 -->
+                            <div style="text-align: left; width: 100%;">
+                                <span style="font-size: 0.8rem; font-weight: 700; color: #887a7d; margin-bottom: 0.4rem; display: inline-block;">FRONT (앞면)</span>
+                                <div class="physical-card-container">
+                                    <div class="physical-card front-card">
+                                        <div class="card-header-row">
+                                            <div class="card-logo">junho.art</div>
+                                            <div class="card-univ-tag"><i class="fa-solid fa-university"></i> BU Computer Science</div>
+                                        </div>
+                                        <div class="card-front-body">
+                                            <div class="card-front-photo-frame">
+                                                <img id="cardFrontImg" src="./img/junho_profile.jpg" alt="Profile">
+                                            </div>
+                                            <div class="card-front-info">
+                                                <div class="card-front-name-row">
+                                                    <span class="card-front-name-ko" id="cardFrontNameKo">허준호</span>
+                                                    <span class="card-front-name-en" id="cardFrontNameEn">Junho Heo</span>
+                                                </div>
+                                                <div class="card-front-dept" id="cardFrontDept">백석대학교 컴퓨터학부</div>
+                                                <span class="card-front-badge" id="cardFrontBadge"><i class="fa-solid fa-graduation-cap"></i> 학부연구생</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-front-footer">
+                                            <span>Computational Psychiatry & Systems</span>
+                                            <span style="font-weight: 700; color: var(--heading-color);">Undergraduate Researcher</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sig-btn-wrap">
+                                    <button class="sig-btn sig-btn-secondary" id="btnDownloadFront">
+                                        <i class="fa-solid fa-download"></i> 앞면 PNG 다운로드
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 뒷면 -->
+                            <div style="text-align: left; width: 100%;">
+                                <span style="font-size: 0.8rem; font-weight: 700; color: #887a7d; margin-bottom: 0.4rem; display: inline-block;">BACK (뒷면)</span>
+                                <div class="physical-card-container">
+                                    <div class="physical-card back-card">
+                                        <div class="card-back-grid">
+                                            <div class="card-back-left">
+                                                <div>
+                                                    <div style="font-weight: bold; color: var(--heading-color); font-size: 0.95rem; margin-bottom: 0.8rem;" id="cardBackName">허준호 | Junho Heo</div>
+                                                    <div class="card-contacts-list">
+                                                        <div class="card-contact-item">
+                                                            <i class="fa-solid fa-envelope"></i> <span id="cardBackEmail">junho@junho.art</span>
+                                                        </div>
+                                                        <div class="card-contact-item">
+                                                            <i class="fa-brands fa-github"></i> <span id="cardBackGithub">github.com/4season</span>
+                                                        </div>
+                                                        <div class="card-contact-item">
+                                                            <i class="fa-solid fa-globe"></i> <span id="cardBackWeb">junho.art</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-research-area">
+                                                    <div class="card-research-lbl">RESEARCH INTERESTS</div>
+                                                    <div class="card-research-val" id="cardBackResearch">계산정신의학 (Computational Psychiatry) & 백엔드 아키텍처</div>
+                                                </div>
+                                            </div>
+                                            <div class="card-back-right">
+                                                <div style="text-align: right;">
+                                                    <div style="font-size: 0.65rem; color: #8c7fb3; font-weight: bold; letter-spacing: 0.5px;">PORTFOLIO</div>
+                                                    <div style="font-size: 0.55rem; color: #a59397; margin-top: 2px;">Scan to visit</div>
+                                                </div>
+                                                <div class="card-qr-block">
+                                                    <div class="card-qr-holder">
+                                                        <!-- QR 코드 이미지 동적 주입 -->
+                                                        <img id="cardBackQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junho.art" alt="QR Code">
+                                                    </div>
+                                                    <div class="card-qr-txt">junho.art</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sig-btn-wrap">
+                                    <button class="sig-btn sig-btn-secondary" id="btnDownloadBack">
+                                        <i class="fa-solid fa-download"></i> 뒷면 PNG 다운로드
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 영역 -->
+    <footer style="margin-top: 4rem;">
+        <p>&copy; 2026 Junho Heo. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 이미지 렌더링용 숨겨진 Canvas 헬퍼 -->
+    <canvas id="canvasHelper" width="960" height="540"></canvas>
+
+    <!-- 토스트 메시지 알림용 요소 -->
+    <div id="toast" class="toast-msg">
+        <i class="fa-solid fa-circle-check" style="color: var(--accent-green-light);"></i>
+        <span id="toast-text">복사되었습니다!</span>
+    </div>
+
+    <!-- 페이지 인터랙션 스크립트 -->
+    <script>
+        // DOM 요소 캐시
+        const inputNameKo = document.getElementById('inputNameKo');
+        const inputNameEn = document.getElementById('inputNameEn');
+        const inputTitle = document.getElementById('inputTitle');
+        const inputSubTitle = document.getElementById('inputSubTitle');
+        const inputDept = document.getElementById('inputDept');
+        const selectEmail = document.getElementById('selectEmail');
+        const customEmailGroup = document.getElementById('customEmailGroup');
+        const inputCustomEmail = document.getElementById('inputCustomEmail');
+        const inputGithub = document.getElementById('inputGithub');
+        const inputWebsite = document.getElementById('inputWebsite');
+        const inputResearch = document.getElementById('inputResearch');
+        const inputProfileUrl = document.getElementById('inputProfileUrl');
+
+        // 서명 미리보기 요소 캐시
+        const sigPreviewImg = document.getElementById('sigPreviewImg');
+        const sigPreviewNameKo = document.getElementById('sigPreviewNameKo');
+        const sigPreviewNameEn = document.getElementById('sigPreviewNameEn');
+        const sigPreviewDept = document.getElementById('sigPreviewDept');
+        const sigPreviewTitle = document.getElementById('sigPreviewTitle');
+        const sigPreviewResearch = document.getElementById('sigPreviewResearch');
+        const sigPreviewResearchBox = document.getElementById('sigPreviewResearchBox');
+        const sigPreviewEmail = document.getElementById('sigPreviewEmail');
+        const sigPreviewEmailLink = document.getElementById('sigPreviewEmailLink');
+        const sigPreviewGithub = document.getElementById('sigPreviewGithub');
+        const sigPreviewGithubLink = document.getElementById('sigPreviewGithubLink');
+        const sigPreviewWeb = document.getElementById('sigPreviewWeb');
+        const sigPreviewWebLink = document.getElementById('sigPreviewWebLink');
+
+        // 명함 미리보기 요소 캐시
+        const cardFrontImg = document.getElementById('cardFrontImg');
+        const cardFrontNameKo = document.getElementById('cardFrontNameKo');
+        const cardFrontNameEn = document.getElementById('cardFrontNameEn');
+        const cardFrontDept = document.getElementById('cardFrontDept');
+        const cardFrontBadge = document.getElementById('cardFrontBadge');
+        const cardBackName = document.getElementById('cardBackName');
+        const cardBackEmail = document.getElementById('cardBackEmail');
+        const cardBackGithub = document.getElementById('cardBackGithub');
+        const cardBackWeb = document.getElementById('cardBackWeb');
+        const cardBackResearch = document.getElementById('cardBackResearch');
+        const cardBackQrImg = document.getElementById('cardBackQrImg');
+
+        // 버튼 및 토스트 캐시
+        const btnCopySignature = document.getElementById('btnCopySignature');
+        const btnDownloadFront = document.getElementById('btnDownloadFront');
+        const btnDownloadBack = document.getElementById('btnDownloadBack');
+        const canvasHelper = document.getElementById('canvasHelper');
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toast-text');
+
+        // 토스트 표시 함수
+        function showToast(message) {
+            toastText.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 현재 설정 값 기준으로 이메일 가져오기
+        function getSelectedEmail() {
+            if (selectEmail.value === 'custom') {
+                return inputCustomEmail.value || 'junho@junho.art';
+            }
+            return selectEmail.value;
+        }
+
+        // 도메인 가독성 정제 함수
+        function cleanDomain(url) {
+            return url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+        }
+
+        // 실시간 미리보기 렌더링 업데이트 함수
+        function updatePreviews() {
+            const nameKo = inputNameKo.value;
+            const nameEn = inputNameEn.value;
+            const title = inputTitle.value;
+            const subTitle = inputSubTitle.value;
+            const dept = inputDept.value;
+            const email = getSelectedEmail();
+            const githubUrl = inputGithub.value;
+            const websiteUrl = inputWebsite.value;
+            const research = inputResearch.value;
+            const profileUrl = inputProfileUrl.value;
+
+            // 1. 이메일 서명 업데이트
+            sigPreviewNameKo.textContent = nameKo;
+            sigPreviewNameEn.textContent = nameEn;
+            sigPreviewDept.textContent = dept;
+            sigPreviewTitle.textContent = title;
+            sigPreviewEmail.textContent = email;
+            sigPreviewEmailLink.href = `mailto:${email}`;
+            sigPreviewGithub.textContent = cleanDomain(githubUrl);
+            sigPreviewGithubLink.href = githubUrl;
+            sigPreviewWeb.textContent = cleanDomain(websiteUrl);
+            sigPreviewWebLink.href = websiteUrl;
+
+            if (research.trim()) {
+                sigPreviewResearchBox.style.display = 'block';
+                sigPreviewResearch.textContent = research;
+            } else {
+                sigPreviewResearchBox.style.display = 'none';
+            }
+
+            // 서명 프로필 이미지 업데이트 (절대경로 자동 처리 또는 대체)
+            if (profileUrl) {
+                sigPreviewImg.src = profileUrl;
+            } else {
+                sigPreviewImg.src = 'https://github.com/4season.png';
+            }
+
+            // 2. 실물 명함 앞면 업데이트
+            cardFrontNameKo.textContent = nameKo;
+            cardFrontNameEn.textContent = nameEn;
+            cardFrontDept.textContent = dept;
+            cardFrontBadge.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${title}`;
+            cardFrontImg.src = profileUrl || './img/junho_profile.jpg';
+
+            // 3. 실물 명함 뒷면 업데이트
+            cardBackName.textContent = `${nameKo} | ${nameEn}`;
+            cardBackEmail.textContent = email;
+            cardBackGithub.textContent = cleanDomain(githubUrl);
+            cardBackWeb.textContent = cleanDomain(websiteUrl);
+            cardBackResearch.textContent = research;
+
+            // QR 코드 URL 업데이트
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(websiteUrl)}`;
+            cardBackQrImg.src = qrUrl;
+        }
+
+        // 입력 요소 이벤트 바인딩
+        const inputs = [inputNameKo, inputNameEn, inputTitle, inputSubTitle, inputDept, inputCustomEmail, inputGithub, inputWebsite, inputResearch, inputProfileUrl];
+        inputs.forEach(input => {
+            input.addEventListener('input', updatePreviews);
+        });
+
+        selectEmail.addEventListener('change', () => {
+            if (selectEmail.value === 'custom') {
+                customEmailGroup.style.display = 'block';
+            } else {
+                customEmailGroup.style.display = 'none';
+            }
+            updatePreviews();
+        });
+
+        // 클립보드 복사 로직
+        btnCopySignature.addEventListener('click', () => {
+            const signaturePreview = document.getElementById('signature-preview-html-source');
+            
+            try {
+                // 서식과 인라인 스타일을 보존한 Rich Text 복사 처리
+                const blob = new Blob([signaturePreview.innerHTML], { type: 'text/html' });
+                const textBlob = new Blob([signaturePreview.innerText], { type: 'text/plain' });
+                const data = [new ClipboardItem({ 'text/html': blob, 'text/plain': textBlob })];
+                
+                navigator.clipboard.write(data).then(() => {
+                    showToast("이메일 서명이 서식 포함 복사되었습니다! Gmail이나 Outlook 서명 설정에 Cmd+V로 붙여넣으세요.");
+                }).catch(err => {
+                    fallbackCopy(signaturePreview);
+                });
+            } catch (err) {
+                fallbackCopy(signaturePreview);
+            }
+        });
+
+        function fallbackCopy(element) {
+            const range = document.createRange();
+            range.selectNode(element);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("이메일 서명이 복사되었습니다. (구형 브라우저 방식)");
+                } else {
+                    showToast("복사에 실패했습니다. 마우스로 긁어서 복사해주세요.");
+                }
+            } catch (err) {
+                showToast("복사에 오류가 발생했습니다. 직접 복사해주세요.");
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        // --- Canvas 고해상도 이미지 다운로드 지원 스크립트 ---
+
+        // 이미지 로딩용 비동기 헬퍼
+        function loadImage(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous'; // CORS 에러 방지
+                img.onload = () => resolve(img);
+                img.onerror = () => resolve(null); // 에러 발생 시 null 반환하여 그리기 진행 차단 안 함
+                img.src = src;
+            });
+        }
+
+        // Canvas 둥근 사각형 그리기 헬퍼
+        function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, strokeWidth) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            
+            if (fill) {
+                ctx.fill();
+            }
+            if (stroke) {
+                ctx.lineWidth = strokeWidth || 1;
+                ctx.strokeStyle = stroke;
+                ctx.stroke();
+            }
+        }
+
+        // 앞면 명함 Canvas 드로잉
+        async function renderFrontCanvas() {
+            const ctx = canvasHelper.getContext('2d');
+            const w = canvasHelper.width;  // 960
+            const h = canvasHelper.height; // 540
+
+            // 1. 기본 흰색 캔버스 리셋 및 둥근 카드 클리핑
+            ctx.clearRect(0, 0, w, h);
+            ctx.save();
+            
+            // 카드 배경색 그래디언트 (#fffdfd -> #fff1f4)
+            const grad = ctx.createLinearGradient(0, 0, w, h);
+            grad.addColorStop(0, '#fffdfd');
+            grad.addColorStop(1, '#fff1f4');
+            ctx.fillStyle = grad;
+            drawRoundedRect(ctx, 0, 0, w, h, 28, true);
+
+            // 2. 미학적 데코레이션 블롭 (웹사이트 컨셉)
+            ctx.save();
+            // 핑크빛 블롭
+            ctx.beginPath();
+            const pinkGrad = ctx.createRadialGradient(w * 0.1, h * 0.1, 0, w * 0.1, h * 0.1, 300);
+            pinkGrad.addColorStop(0, 'rgba(255, 182, 193, 0.25)');
+            pinkGrad.addColorStop(1, 'rgba(255, 182, 193, 0)');
+            ctx.fillStyle = pinkGrad;
+            ctx.arc(w * 0.1, h * 0.1, 300, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 녹색빛 블롭
+            ctx.beginPath();
+            const greenGrad = ctx.createRadialGradient(w * 0.9, h * 0.9, 0, w * 0.9, h * 0.9, 350);
+            greenGrad.addColorStop(0, 'rgba(192, 255, 182, 0.2)');
+            greenGrad.addColorStop(1, 'rgba(192, 255, 182, 0)');
+            ctx.fillStyle = greenGrad;
+            ctx.arc(w * 0.9, h * 0.9, 350, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // 3. 로고 (junho.art)
+            ctx.fillStyle = '#b37f8c'; // --heading-color
+            ctx.font = 'bold 36px "Gowun Dodum", sans-serif';
+            ctx.fillText('junho.art', 50, 75);
+
+            // 4. 소속 대학 태그
+            ctx.fillStyle = '#8c7fb3';
+            ctx.font = 'bold 16px "Gowun Dodum", sans-serif';
+            const deptTag = 'BU Computer Science';
+            const tagWidth = ctx.measureText(deptTag).width;
+            ctx.fillStyle = 'rgba(140, 127, 179, 0.08)';
+            drawRoundedRect(ctx, w - tagWidth - 80, 48, tagWidth + 24, 36, 8, true);
+            ctx.fillStyle = '#8c7fb3';
+            ctx.fillText(deptTag, w - tagWidth - 68, 72);
+
+            // 5. 프로필 사진 로드 및 드로잉
+            const profileImgSrc = inputProfileUrl.value || './img/junho_profile.jpg';
+            const img = await loadImage(profileImgSrc);
+            
+            const px = 50;
+            const py = 180;
+            const pw = 144;
+            const ph = 184;
+            
+            // 프로필 액자 배경 및 그림자
+            ctx.save();
+            ctx.shadowColor = 'rgba(179, 127, 140, 0.15)';
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 8;
+            ctx.fillStyle = '#ffffff';
+            drawRoundedRect(ctx, px - 6, py - 6, pw + 12, ph + 12, 16, true);
+            ctx.restore();
+
+            if (img) {
+                ctx.save();
+                // 둥글게 프로필 클리핑
+                drawRoundedRect(ctx, px, py, pw, ph, 10, false);
+                ctx.clip();
+                ctx.drawImage(img, px, py, pw, ph);
+                ctx.restore();
+            } else {
+                // 대체용 그래픽 드로잉
+                ctx.fillStyle = '#f7f3f5';
+                drawRoundedRect(ctx, px, py, pw, ph, 10, true);
+                ctx.fillStyle = '#b37f8c';
+                ctx.font = '40px "Font Awesome 6 Free"';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('👤', px + pw/2, py + ph/2);
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'alphabetic';
+            }
+
+            // 6. 이름 & 소속 정보
+            ctx.fillStyle = '#594a4e'; // --text-color
+            ctx.font = 'bold 38px "Gowun Dodum", sans-serif';
+            ctx.fillText(inputNameKo.value, 230, 240);
+
+            // 영문 이름 (포인트 칼라 녹색)
+            ctx.fillStyle = '#86b37f'; // --accent-green
+            ctx.font = 'bold 20px "Gowun Dodum", sans-serif';
+            const nameKoWidth = ctx.measureText(inputNameKo.value).width;
+            ctx.fillText(inputNameEn.value, 230 + nameKoWidth + 80, 240);
+
+            // 소속 학과
+            ctx.fillStyle = '#887a7d';
+            ctx.font = '22px "Gowun Dodum", sans-serif';
+            ctx.fillText(inputDept.value, 230, 285);
+
+            // 학부연구생 배지
+            const badgeText = `🎓 ${inputTitle.value}`;
+            ctx.font = 'bold 16px "Gowun Dodum", sans-serif';
+            const badgeWidth = ctx.measureText(badgeText).width;
+            ctx.fillStyle = '#86b37f';
+            drawRoundedRect(ctx, 230, 310, badgeWidth + 20, 30, 15, true);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(badgeText, 240, 330);
+
+            // 7. 하단 라인 및 장식
+            ctx.strokeStyle = 'rgba(179, 127, 140, 0.15)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(50, h - 90);
+            ctx.lineTo(w - 50, h - 90);
+            ctx.stroke();
+            ctx.setLineDash([]); // 대시 리셋
+
+            // 푸터 설명구
+            ctx.fillStyle = '#a59397';
+            ctx.font = '18px "Gowun Dodum", sans-serif';
+            ctx.fillText('Computational Psychiatry & Systems', 50, h - 45);
+
+            ctx.fillStyle = '#b37f8c';
+            ctx.font = 'bold 18px "Gowun Dodum", sans-serif';
+            const roleTxt = inputSubTitle.value;
+            const roleWidth = ctx.measureText(roleTxt).width;
+            ctx.fillText(roleTxt, w - roleWidth - 50, h - 45);
+
+            ctx.restore();
+        }
+
+        // 뒷면 명함 Canvas 드로잉
+        async function renderBackCanvas() {
+            const ctx = canvasHelper.getContext('2d');
+            const w = canvasHelper.width;  // 960
+            const h = canvasHelper.height; // 540
+
+            // 1. 배경 클리핑 및 컬러링
+            ctx.clearRect(0, 0, w, h);
+            ctx.save();
+            ctx.fillStyle = '#ffffff';
+            drawRoundedRect(ctx, 0, 0, w, h, 28, true);
+
+            // 은은한 사선 레이아웃 라인
+            ctx.strokeStyle = '#f2e8ea';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(w * 0.62, 0);
+            ctx.lineTo(w * 0.62, h);
+            ctx.stroke();
+
+            // 2. 정보 텍스트 (이름 & 직함)
+            ctx.fillStyle = '#b37f8c';
+            ctx.font = 'bold 28px "Gowun Dodum", sans-serif';
+            const titleString = `${inputNameKo.value} | ${inputNameEn.value}`;
+            ctx.fillText(titleString, 60, 90);
+
+            // 3. 연락처 아이콘 & 텍스트
+            const emailVal = getSelectedEmail();
+            const githubVal = cleanDomain(inputGithub.value);
+            const webVal = cleanDomain(inputWebsite.value);
+
+            ctx.font = '18px "Gowun Dodum", sans-serif';
+            
+            // 이메일
+            ctx.fillStyle = '#86b37f';
+            ctx.fillText('✉', 60, 160);
+            ctx.fillStyle = '#594a4e';
+            ctx.fillText(emailVal, 90, 160);
+
+            // 깃허브
+            ctx.fillStyle = '#86b37f';
+            ctx.fillText('🐙', 60, 205);
+            ctx.fillStyle = '#594a4e';
+            ctx.fillText(githubVal, 90, 205);
+
+            // 웹페이지
+            ctx.fillStyle = '#86b37f';
+            ctx.fillText('🌐', 60, 250);
+            ctx.fillStyle = '#594a4e';
+            ctx.fillText(webVal, 90, 250);
+
+            // 4. 연구 분야 섹션
+            ctx.strokeStyle = '#f2e8ea';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(60, 310);
+            ctx.lineTo(w * 0.58, 310);
+            ctx.stroke();
+
+            ctx.fillStyle = '#b37f8c';
+            ctx.font = 'bold 16px "Gowun Dodum", sans-serif';
+            ctx.fillText('RESEARCH INTERESTS', 60, 350);
+
+            ctx.fillStyle = '#776a6e';
+            ctx.font = '18px "Gowun Dodum", sans-serif';
+            // 줄바꿈 대응 로직
+            const researchText = inputResearch.value;
+            if (ctx.measureText(researchText).width > 480) {
+                // 글자가 너무 길면 절반으로 쪼개어 드로잉
+                const middleIndex = Math.floor(researchText.length / 2);
+                const part1 = researchText.substring(0, middleIndex);
+                const part2 = researchText.substring(middleIndex);
+                ctx.fillText(part1, 60, 390);
+                ctx.fillText(part2, 60, 420);
+            } else {
+                ctx.fillText(researchText, 60, 395);
+            }
+
+            // 5. 오른쪽 영역 (QR 코드)
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#8c7fb3';
+            ctx.font = 'bold 16px "Gowun Dodum", sans-serif';
+            ctx.fillText('PORTFOLIO WEBSITE', w - 60, 90);
+
+            ctx.fillStyle = '#a59397';
+            ctx.font = '14px "Gowun Dodum", sans-serif';
+            ctx.fillText('Scan to visit developer page', w - 60, 115);
+            ctx.textAlign = 'left'; // 원상 복구
+
+            // QR 코드 API 연동 및 드로잉
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200&data=${encodeURIComponent(inputWebsite.value)}`;
+            const qrImg = await loadImage(qrUrl);
+            
+            const qSize = 180;
+            const qx = w - qSize - 60;
+            const qy = 190;
+
+            // QR 프레임 그리기
+            ctx.fillStyle = '#ffffff';
+            ctx.save();
+            ctx.shadowColor = 'rgba(179, 127, 140, 0.1)';
+            ctx.shadowBlur = 15;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 4;
+            drawRoundedRect(ctx, qx - 12, qy - 12, qSize + 24, qSize + 24, 12, true, '#f2e8ea', 1);
+            ctx.restore();
+
+            if (qrImg) {
+                ctx.drawImage(qrImg, qx, qy, qSize, qSize);
+            } else {
+                // QR 로드 실패 시 그리드 형태 대체 박스
+                ctx.fillStyle = '#f7f3f5';
+                ctx.fillRect(qx, qy, qSize, qSize);
+                ctx.fillStyle = '#a59397';
+                ctx.font = '14px sans-serif';
+                ctx.fillText('QR Code', qx + 55, qy + 90);
+            }
+
+            // 하단 텍스트 주소
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#a59397';
+            ctx.font = 'bold 15px "Gowun Dodum", sans-serif';
+            ctx.fillText(webVal, qx + qSize/2, qy + qSize + 45);
+
+            ctx.restore();
+        }
+
+        // 다운로드 트리거 이벤트 핸들러
+        btnDownloadFront.addEventListener('click', async () => {
+            btnDownloadFront.disabled = true;
+            btnDownloadFront.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 이미지 생성 중...';
+            
+            await renderFrontCanvas();
+            
+            const link = document.createElement('a');
+            link.download = `junho_art_card_front.png`;
+            link.href = canvasHelper.toDataURL('image/png');
+            link.click();
+            
+            btnDownloadFront.disabled = false;
+            btnDownloadFront.innerHTML = '<i class="fa-solid fa-download"></i> 앞면 PNG 다운로드';
+            showToast("명함 앞면 이미지가 성공적으로 다운로드되었습니다!");
+        });
+
+        btnDownloadBack.addEventListener('click', async () => {
+            btnDownloadBack.disabled = true;
+            btnDownloadBack.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 이미지 생성 중...';
+            
+            await renderBackCanvas();
+            
+            const link = document.createElement('a');
+            link.download = `junho_art_card_back.png`;
+            link.href = canvasHelper.toDataURL('image/png');
+            link.click();
+            
+            btnDownloadBack.disabled = false;
+            btnDownloadBack.innerHTML = '<i class="fa-solid fa-download"></i> 뒷면 PNG 다운로드';
+            showToast("명함 뒷면 이미지가 성공적으로 다운로드되었습니다!");
+        });
+
+        // 초기 화면 업데이트 실행
+        updatePreviews();
+    </script>
+</body>
+
+</html>

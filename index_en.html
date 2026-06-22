@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Browser language detection and automatic redirection (with session override to prevent loops) -->
+    <script>
+        (function() {
+            if (sessionStorage.getItem('lang-redirect-checked')) {
+                // Already checked in session, respect manual entry on this page
+                localStorage.setItem('user-language', 'en');
+                return;
+            }
+            
+            const savedLang = localStorage.getItem('user-language');
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // Set session check flag
+            sessionStorage.setItem('lang-redirect-checked', 'true');
+            
+            if (savedLang === 'ko') {
+                window.location.replace('index.html' + window.location.hash);
+            } else if (savedLang === 'en') {
+                // English version remains
+            } else if (browserLang && browserLang.toLowerCase().startsWith('ko')) {
+                localStorage.setItem('user-language', 'ko');
+                window.location.replace('index.html' + window.location.hash);
+            } else {
+                localStorage.setItem('user-language', 'en');
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junho Heo | Undergraduate Researcher</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts: 'Gowun Dodum' & 'Inter' for English readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Apply cleaner sans-serif font stack for English version */
+        body {
+            font-family: 'Inter', 'Gowun Dodum', sans-serif;
+        }
+    </style>
+
+    <!-- Favicon settings -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+    <!-- Background Animation Blobs representing Neural Networks -->
+    <div class="bg-blob-container">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+
+    <!-- Mobile/Tablet Navigation Drawer -->
+    <div class="nav-drawer" id="navDrawer">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <a href="#about">About</a>
+        <a href="#journey">Journey</a>
+        <a href="#skills">Skills & Goals</a>
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/4season" target="_blank">GitHub</a>
+        <div class="mobile-lang-toggle" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; gap: 1rem; font-size: 1.1rem; font-weight: 700;">
+            <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" style="color: var(--text-color); text-decoration: none;">KO</a>
+            <span style="opacity: 0.3;">|</span>
+            <span style="color: var(--heading-color);">EN</span>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">junho.art</a>
+            <nav class="desktop-nav">
+                <a href="#about">About</a>
+                <a href="#journey">Journey</a>
+                <a href="#skills">Skills & Goals</a>
+                <a href="#projects">Projects</a>
+                <a href="https://github.com/4season" target="_blank" style="margin-right: 1.5rem;">GitHub <i
+                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <span class="lang-toggle-container" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border-color); padding: 0.2rem 0.6rem; border-radius: 20px; background-color: rgba(255,255,255,0.5);">
+                    <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" style="color: var(--text-color); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-color)'">KO</a>
+                    <span style="opacity: 0.3;">|</span>
+                    <span style="color: var(--heading-color);">EN</span>
+                </span>
+            </nav>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- About Section (Hero) -->
+        <section id="about" class="section hero-section reveal-on-scroll">
+            <div class="hero-container">
+                <div class="hero-profile">
+                    <div class="profile-img-container">
+                        <img src="./img/junho_profile.jpg" alt="Profile Image" class="profile-img-internal">
+                    </div>
+                    <div class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> Undergraduate Researcher</div>
+                </div>
+                <h1>Hello, I'm Junho Heo, an Aspiring Researcher.</h1>
+                <p class="hero-lead">I am an undergraduate researcher majoring in Computer Science at Baekseok University, aspiring to integrate neuroscience with software architecture.<br>Driven by constant questioning throughout my learning and development journey, I document my path of growth.</p>
+
+                <div class="hero-quote glass-card">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <p>Faced with the challenges of an incurable disease, I discovered my capacity for deep thinking. Consciously utilizing my brain's <strong>Default Mode Network (DMN)</strong>—which I once struggled to control—I shifted from fragmented thoughts to continuous, deep analytical thinking.</p>
+                    <p style="margin-top: 1.2rem;">As information grows, I think deeper and view problems from diverse perspectives. My ultimate goal is to become a researcher in <strong>Computational Psychiatry</strong>, leveraging stable backend systems and intelligent AI technologies to help solve people's physical and mental difficulties.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section (Timeline) -->
+        <section id="journey" class="section reveal-on-scroll">
+            <h2><i class="fa-solid fa-route-highway"></i> My Journey</h2>
+            <p class="section-desc">Footsteps of an undergraduate researcher building foundations in academics, software development, and research.</p>
+
+            <div class="timeline">
+                <div class="timeline-line-bg"></div>
+                <div class="timeline-line-progress"></div>
+
+                <!-- Timeline Item 1: Education -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"><i class="fa-solid fa-university"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Education | Spring 2021 ~</span>
+                            <span class="timeline-tag edu-tag">Edu & Scholarship</span>
+                        </div>
+                        <h3>Entered Baekseok University, Computer Science Major</h3>
+                        <p>Began building foundational knowledge in computer science and engineering. Dedicated to my academic path, I maintained solid academic performance and received the National Scholarship (Type II).</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2: UML Competition -->
+                <div class="timeline-item right">
+                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Award | Fall 2023</span>
+                            <span class="timeline-tag award-tag">Award</span>
+                        </div>
+                        <h3>UML Object-Oriented Modeling Competition Excellence Award</h3>
+                        <p>Awarded the Excellence Award for designing system component interactions and data flows. Moving beyond simple visualization, this experience served as a stepping stone to architecture design, prompting deep analysis of backend communication stability and data propagation structures.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3: Scholarship -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Honor | Spring 24 & Fall 25</span>
+                            <span class="timeline-tag honor-tag">Scholarship</span>
+                        </div>
+                        <h3>Received Professor Recommendation Scholarship Twice</h3>
+                        <p>Awarded the Professor Recommendation Scholarship twice (Spring 2024 & Fall 2025) in recognition of my academic diligence and research potential. This helped expand my horizons as an aspiring researcher.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4: DIP SW Convergence Program -->
+                <div class="timeline-item right">
+                    <div class="timeline-dot"><i class="fa-solid fa-users"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Activity | August 2025</span>
+                            <span class="timeline-tag activity-tag">Activity</span>
+                        </div>
+                        <h3>Completed DIP SW Convergence Talent Program</h3>
+                        <p>Completed the Software Convergence Talent Development Program organized by the Daegu Digital Innovation Promotion agency (DIP), extending software integration skills and collaborative teamwork capabilities.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5: Projects & Data Modeling -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"><i class="fa-solid fa-gears"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Projects | Fall 2025 ~ Present</span>
+                            <span class="timeline-tag proj-tag">Projects</span>
+                        </div>
+                        <h3>Project-based Development & AI Data Modeling</h3>
+                        <p>Following the DIP program, I focused on AI projects and data modeling. I designed and developed the Magnolia chatbot, an MLP model predicting Seongnam-si City Bus Route 109 delays, and a CNN-based Drug-Drug Interaction (DDI) prediction model.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 6: BAI Lab Internship -->
+                <div class="timeline-item right">
+                    <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Research | Summer 2026 ~ Present</span>
+                            <span class="timeline-tag proj-tag">Researcher</span>
+                        </div>
+                        <h3>Brain-AI Interface (BAI) lab Undergraduate Researcher</h3>
+                        <p>Participated as an undergraduate researcher at the Brain-AI Interface (BAI) Lab, exploring neural data pre-processing pipelines and initial research infrastructure setup. Gaining hands-on laboratory experience, I am building research foundations for my future goal in Computational Psychiatry.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Present Location Indicator Node -->
+                <div class="timeline-now-node">
+                    <div class="now-badge">
+                        <i class="fa-solid fa-location-crosshairs fa-spin"></i> Current Journey Loading...
+                    </div>
+                </div>
+
+                <!-- Timeline Item 7: Expected Graduation -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Education | Feb 2027 (Expected)</span>
+                            <span class="timeline-tag edu-tag">Expected Grad</span>
+                        </div>
+                        <h3>Expected Graduation from Baekseok University</h3>
+                        <p>Concluding my Bachelor's degree in Computer Science, I will graduate with a solid foundation in backend architecture, data transmission mechanisms, and data analysis pipelines.</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 8: Future Roadmap -->
+                <div class="timeline-item right">
+                    <div class="timeline-dot"><i class="fa-solid fa-dna"></i></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">Future Roadmap | Graduate Studies</span>
+                            <span class="timeline-tag future-tag">Research Plan</span>
+                        </div>
+                        <h3>Stepping Stone to Neural Data & AI Integration Research</h3>
+                        <p>Aiming to pursue graduate studies focused on Brain-AI Interfaces and Computational Psychiatry, specifically developing AI computational models for EEG and fMRI neural data analysis. My core research goal is to design diagnostic assistant infrastructures for clinical applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning & Skills Section -->
+        <section id="skills" class="section reveal-on-scroll">
+            <h2><i class="fa-solid fa-graduation-cap"></i> Learning & Skills</h2>
+            <p class="section-desc">Technologies I have hands-on experience with, and core domains I wish to research deeply as an aspiring investigator.</p>
+
+            <div class="skills-grid">
+                <!-- Skill Card 1: Learned & Applied -->
+                <div class="skills-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3>Hands-on & Applied</h3>
+                    <p class="card-sub">Technologies learned and applied at the undergraduate level</p>
+                    <ul class="skills-list">
+                        <li><i class="fa-solid fa-circle-check"></i> API data communication optimization using Go, Rust, and Kotlin</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Artificial neural network data pre-processing and training based on MLP and CNN</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Structured and unstructured data analysis & purpose-specific dataset pre-processing</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Backend architecture design focused on stable data streams</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Card 2: Future Target -->
+                <div class="skills-card glass-card future-focus-card">
+                    <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <h3>Research & Future Focus</h3>
+                    <p class="card-sub">Core research domains I plan to study professionally in the future</p>
+                    <ul class="skills-list">
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Fundamental neuroscience and medicine domain study</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> EEG/fMRI-based neural signal pre-processing and analysis</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Advanced AI computational models for mental disorder prediction (Computational Psychiatry)</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Real-time Brain-Computer Interface (BCI) data pipeline design</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Secure medical data transmission for handling healthcare and biometric information</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section reveal-on-scroll">
+            <h2><i class="fa-solid fa-cubes"></i> Selected Works</h2>
+            <p class="section-desc">A selection of projects built to demonstrate my engineering and research capabilities.</p>
+            <div class="project-grid" id="projectGrid">
+                <!-- Dynamically loaded by script.js -->
+                <div class="loading-spinner">Loading projects...</div>
+            </div>
+
+            <!-- GitHub Banner -->
+            <div class="github-footer-note glass-card reveal-on-scroll">
+                <p><i class="fa-brands fa-github"></i> Detailed project codes and development experiment logs are recorded and managed on <a href="https://github.com/4season"
+                        target="_blank">Junho Heo's GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2026 Junho Heo. <a href="./LICENSE" target="_blank"
+                style="color: inherit; text-decoration: underline;">All Rights Reserved</a>.
+        </p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">
+            <i class="fa-solid fa-envelope"></i> Contact: <a href="mailto:contact@junho.art"
+                style="color: inherit; text-decoration: underline;">contact@junho.art</a>
+            <span style="margin: 0 10px; opacity: 0.5;">|</span>
+            <i class="fa-solid fa-id-card"></i> <a href="./signature.html"
+                style="color: inherit; text-decoration: underline;">Signature & Card Builder</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="script.js?v=1.0.4"></script>
+</body>
+
+</html>
