@@ -1,2 +1,5 @@
 pinned-repos.json
 .DS_Store
+~$*
+*_backup.*
+*.tmp
