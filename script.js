@@ -31,7 +31,7 @@ const LOCAL_JSON_URL = 'pinned-repos.json';
 // 기본 대표 이미지 매핑 테이블
 const PROJECT_IMAGES = {
     'Magnolia': './img/IMG_8978.jpg',
-    'sobdm-project': 'https://images.unsplash.com/photo-1557223562-6c77ef16210f?q=80&w=800', // 성남시 109번 마을버스와 유사한 한국식 초록색 버스 이미지
+    'sobdm-project': 'https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=800', // 뇌/신경망 추상 이미지
     'ConvDDI': 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=800',     // 약물 상호작용 관련 알약/의약 이미지
     'junho.art': './img/portfolio_preview.png',                                               // 포트폴리오 웹사이트 이미지
     'TrendXiv': './img/trendxiv_preview.png'                                                  // 트렌드 예측 프로젝트 이미지
@@ -39,8 +39,8 @@ const PROJECT_IMAGES = {
 
 // 가독성을 위한 프로젝트별 영문 설명 매핑 테이블 (GitHub 설명보다 우선 반영됨)
 const PROJECT_DESCRIPTIONS = {
-    'Magnolia': 'An intelligent KakaoTalk chatbot built with Go, Rust, and Kotlin, designed to process notification data and automate tasks.',
-    'sobdm-project': 'A Multilayer Perceptron (MLP) model to predict arrival delays for Seongnam-si City Bus Route 109.',
+    'Magnolia': 'A Python template pipeline for EEG and fMRI neural signal preprocessing and machine learning model training.',
+    'sobdm-project': 'A reinforcement learning (Q-learning) fitting and simulation engine for 2-step decision making task data.',
     'ConvDDI': 'A Convolutional Neural Network (CNN) model for detecting drug-to-drug interactions.',
     'junho.art': 'A personal responsive portfolio website built with HTML, CSS, and JavaScript to showcase developer logs.',
     'TrendXiv': 'A machine learning system that predicts academic research trends on arXiv using Principal Component Analysis (PCA) and classifier models.'
@@ -53,14 +53,14 @@ const DEFAULT_PROJECTS = [
         description: PROJECT_DESCRIPTIONS['Magnolia'],
         url: 'https://github.com/4season/Magnolia',
         image: PROJECT_IMAGES['Magnolia'],
-        tags: ['Go', 'Rust', 'Kotlin', 'API', 'Chatbot']
+        tags: ['Python', 'Neuroscience', 'EEG', 'fMRI', 'Preprocessing']
     },
     {
         name: 'sobdm-project',
         description: PROJECT_DESCRIPTIONS['sobdm-project'],
         url: 'https://github.com/4season/sobdm-project',
         image: PROJECT_IMAGES['sobdm-project'],
-        tags: ['Python', 'Machine-Learning', 'MLP']
+        tags: ['Python', 'Reinforcement-Learning', 'Q-learning', 'Modeling']
     },
     {
         name: 'ConvDDI',
