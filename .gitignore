@@ -3,3 +3,16 @@ pinned-repos.json
 ~$*
 *_backup.*
 *.tmp
+
+# Word export artifacts
+Junho_Heo_CV.fld/
+Junho_Heo_CV.html
+
+# nginx default page
+index.nginx-debian.html
+
+# Backup directory
+backup_original/
+
+# Working drafts
+projects_revised.md
