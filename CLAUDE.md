@@ -54,3 +54,26 @@ Cron (every 30 min):
 - **Adding a new project image**: place it in `img/`, add the mapping in `PROJECT_IMAGES`.
 - **Favicon assets** live in `favicon/` (not `favicon_io/`).
 - `pinned-repos.json` is gitignored — it's generated at runtime on the server.
+
+## CSS conventions
+
+New colors and radii must use or extend the CSS variables in `:root` (`style.css`) — do not add raw hex values:
+
+| Variable | Value | Use |
+|---|---|---|
+| `--accent-purple` | `#8c7fb3` | Future-focus card border, timeline gradient, now-badge |
+| `--text-muted` | `#a59397` | Footer, subdued labels |
+| `--card-radius` | `18px` | Glass cards |
+| `--pill-radius` | `50px` | Badge / now-badge shapes |
+
+Language toggle markup uses dedicated CSS classes — do not add inline styles:
+
+- `.lang-toggle-container` — the pill wrapper in the desktop header
+- `.mobile-lang-toggle` — the drawer equivalent
+- `.lang-active` / `.lang-sep` / `.lang-inactive` — active language, separator, and switchable link
+
+Footer uses `.contact-line` and `.sep` classes (defined in `style.css`) — no inline styles needed.
+
+## Accessibility
+
+Every decorative FontAwesome `<i>` must have `aria-hidden="true"`. All `target="_blank"` links must include `rel="noopener noreferrer"`.
