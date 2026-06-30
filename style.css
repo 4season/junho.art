@@ -149,10 +149,12 @@ header {
     border-radius: 20px;
     background-color: rgba(255,255,255,0.5);
 }
-.lang-active { color: var(--heading-color); }
+.lang-active { color: var(--accent-green); }
 .lang-sep { opacity: 0.3; }
 .lang-inactive { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
 .lang-inactive:hover { color: var(--accent-green); }
+.nav-drawer .mobile-lang-toggle a { font-size: inherit; margin-bottom: 0; }
+.desktop-nav .lang-toggle-container a { margin: 0; }
 .menu-btn { display: none; }
 
 /* 모바일 드로어 언어 토글 */
@@ -951,6 +953,49 @@ footer .sep { margin: 0 10px; opacity: 0.5; }
     border: 1px solid var(--border-color);
     box-shadow: 0 8px 32px 0 rgba(179, 127, 140, 0.04);
     overflow-x: auto;
+}
+
+/* 이메일 클라이언트 미리보기 크롬 */
+.sig-email-mock {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 20px rgba(179, 127, 140, 0.07);
+}
+.sig-email-chrome {
+    background: #f9f5f6;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+}
+.sig-email-field-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.78rem;
+    padding: 0.22rem 0;
+    border-bottom: 1px solid rgba(179, 127, 140, 0.1);
+    color: var(--text-color);
+}
+.sig-email-field-label {
+    font-weight: 700;
+    color: var(--text-muted);
+    min-width: 62px;
+    font-size: 0.73rem;
+}
+.sig-email-field-muted { color: #c4b8bb; }
+.sig-email-body { padding: 1.5rem 2rem; }
+.sig-email-body-text {
+    font-size: 13.5px;
+    color: #776a6e;
+    line-height: 1.75;
+    margin: 0 0 1.1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.sig-email-sig-sep {
+    font-size: 12px;
+    color: #b0a4a8;
+    margin-bottom: 1rem;
 }
 
 /* 실물 느낌의 디지털 명함 (Front / Back) */

@@ -116,7 +116,7 @@
                     <!-- 프로필 이미지 URL -->
                     <div class="sig-input-group">
                         <label for="inputProfileUrl">프로필 이미지 URL</label>
-                        <input type="text" id="inputProfileUrl" value="./img/junho_profile.jpg" placeholder="웹에 업로드된 이미지 주소">
+                        <input type="text" id="inputProfileUrl" value="https://junho.art/img/junho_profile.jpg" placeholder="웹에 업로드된 이미지 주소">
                         <p style="font-size: 0.75rem; color: #a59397; margin-top: 4px; line-height: 1.4;">
                             <i class="fa-solid fa-circle-info"></i> 이메일 서명 수신자가 정상적으로 이미지를 보려면 웹사이트 도메인 주소가 포함된 절대 주소(예: <code>https://junho.art/img/junho_profile.jpg</code> 또는 <code>https://github.com/4season.png</code>)를 사용하는 것이 좋습니다.
                         </p>
@@ -129,54 +129,87 @@
                     <!-- 1. 이메일 서명 미리보기 -->
                     <div class="sig-preview-section">
                         <h3><i class="fa-solid fa-envelope-open-text"></i> 이메일 서명 미리보기 (HTML)</h3>
-                        <div class="sig-preview-box" style="background-color: #ffffff;">
-                            <!-- 복사를 위한 소스 영역 -->
-                            <div id="signature-preview-html-source">
-                                <!-- 이메일 클라이언트 호환성을 극대화한 인라인 스타일 테이블 -->
-                                <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Gowun Dodum', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #594a4e; font-size: 14px; line-height: 1.6; max-width: 500px; border-collapse: collapse; text-align: left;">
-                                    <tr>
-                                        <!-- 프로필 이미지 -->
-                                        <td valign="top" style="padding-right: 18px; width: 85px; vertical-align: top;">
-                                            <img id="sigPreviewImg" src="https://github.com/4season.png" alt="Profile" width="80" height="100" style="border-radius: 8px; border: 2px solid #b37f8c; display: block; object-fit: cover; background-color: #f7f3f5; width: 80px; height: 100px;" />
-                                        </td>
-                                        <!-- 수직 구분선 -->
-                                        <td style="border-left: 2px solid #f2e8ea; padding-right: 18px; width: 1px; vertical-align: stretch;"></td>
-                                        <!-- 정보 영역 -->
-                                        <td valign="middle" style="vertical-align: middle;">
-                                            <div style="font-size: 17px; font-weight: bold; color: #b37f8c; margin-bottom: 2px; letter-spacing: 0.5px;">
-                                                <span id="sigPreviewNameKo">허준호</span> 
-                                                <span id="sigPreviewNameEn" style="font-size: 12px; font-weight: bold; color: #86b37f; margin-left: 6px;">Junho Heo</span>
-                                            </div>
-                                            <div style="font-size: 12px; font-weight: bold; color: #594a4e; margin-bottom: 6px;">
-                                                <span id="sigPreviewDept">백석대학교 컴퓨터학부</span> | <span id="sigPreviewTitle" style="color: #8c7fb3;">학부연구생</span>
-                                            </div>
-                                            <div id="sigPreviewResearchBox" style="font-size: 11px; color: #776a6e; line-height: 1.4; margin-bottom: 8px; border-bottom: 1px dashed #f2e8ea; padding-bottom: 6px;">
-                                                관심 분야: <span id="sigPreviewResearch">계산정신의학 (Computational Psychiatry) & 백엔드 아키텍처</span>
-                                            </div>
-                                            <!-- 연락처 목록 -->
-                                            <table cellpadding="0" cellspacing="0" border="0" style="font-size: 11px; color: #776a6e; line-height: 1.5;">
-                                                <tr>
-                                                    <td style="padding-bottom: 2px;">
-                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">Email</strong> 
-                                                        <a id="sigPreviewEmailLink" href="mailto:junho@junho.art" style="color: #594a4e; text-decoration: none; font-weight: 500;"><span id="sigPreviewEmail">junho@junho.art</span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding-bottom: 2px;">
-                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">GitHub</strong> 
-                                                        <a id="sigPreviewGithubLink" href="https://github.com/4season" target="_blank" rel="noopener noreferrer" style="color: #594a4e; text-decoration: none;"><span id="sigPreviewGithub">github.com/4season</span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <strong style="color: #b37f8c; width: 45px; display: inline-block;">Website</strong> 
-                                                        <a id="sigPreviewWebLink" href="https://junho.art" target="_blank" rel="noopener noreferrer" style="color: #86b37f; text-decoration: none; font-weight: bold;"><span id="sigPreviewWeb">junho.art</span></a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                        <!-- 이메일 클라이언트 UI를 흉내낸 미리보기 크롬 -->
+                        <div class="sig-email-mock">
+                            <div class="sig-email-chrome">
+                                <div class="sig-email-field-row">
+                                    <span class="sig-email-field-label">보낸 사람</span>
+                                    <span id="sigChromeSender">junho@junho.art</span>
+                                </div>
+                                <div class="sig-email-field-row">
+                                    <span class="sig-email-field-label">받는 사람</span>
+                                    <span class="sig-email-field-muted">recipient@example.com</span>
+                                </div>
+                                <div class="sig-email-field-row" style="border-bottom: none;">
+                                    <span class="sig-email-field-label">제목</span>
+                                    <span class="sig-email-field-muted">Re: [미팅 일정 조율]</span>
+                                </div>
+                            </div>
+                            <div class="sig-email-body">
+                                <p class="sig-email-body-text">안녕하세요,<br><br>메일 내용이 이곳에 작성됩니다.<br><br>감사합니다.</p>
+                                <div class="sig-email-sig-sep">--</div>
+                                <!-- 복사를 위한 소스 영역 -->
+                                <div id="signature-preview-html-source">
+                                    <!-- 이메일 클라이언트 호환성을 극대화한 인라인 스타일 테이블 -->
+                                    <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Gowun Dodum', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #594a4e; font-size: 14px; line-height: 1.6; max-width: 520px; border-collapse: collapse; text-align: left; border-top: 3px solid #b37f8c;">
+                                        <tr>
+                                            <td colspan="3" height="12" style="font-size: 0; line-height: 0;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <!-- 프로필 이미지 -->
+                                            <td valign="middle" style="padding-right: 18px; width: 84px; vertical-align: middle;">
+                                                <img id="sigPreviewImg" src="https://junho.art/img/junho_profile.jpg" alt="Profile" width="76" height="95" style="border-radius: 8px; border: 2px solid #b37f8c; display: block; object-fit: cover; background-color: #f7f3f5; width: 76px; height: 95px;" />
+                                            </td>
+                                            <!-- 수직 구분선 -->
+                                            <td style="border-left: 2px solid #f2e8ea; padding-right: 18px; width: 1px; vertical-align: stretch;"></td>
+                                            <!-- 정보 영역 -->
+                                            <td valign="middle" style="vertical-align: middle;">
+                                                <div style="margin-bottom: 2px;">
+                                                    <span id="sigPreviewNameKo" style="font-size: 17px; font-weight: bold; color: #b37f8c; letter-spacing: 0.3px;">허준호</span>
+                                                    <span id="sigPreviewNameEn" style="font-size: 11px; font-weight: bold; color: #86b37f; margin-left: 6px;">Junho Heo</span>
+                                                </div>
+                                                <div style="font-size: 11.5px; color: #594a4e; margin-bottom: 7px;">
+                                                    <span id="sigPreviewDept">백석대학교 컴퓨터학부</span>
+                                                    <span style="color: #d0c4c8; margin: 0 5px;">|</span>
+                                                    <span id="sigPreviewTitle" style="color: #8c7fb3; font-weight: 600;">학부연구생</span>
+                                                </div>
+                                                <div id="sigPreviewResearchBox" style="font-size: 10.5px; color: #776a6e; line-height: 1.4; margin-bottom: 8px; border-bottom: 1px dashed #f2e8ea; padding-bottom: 6px;">
+                                                    관심 분야: <span id="sigPreviewResearch">계산정신의학 (Computational Psychiatry) & 백엔드 아키텍처</span>
+                                                </div>
+                                                <!-- 연락처 목록 -->
+                                                <table cellpadding="0" cellspacing="0" border="0" style="font-size: 11px; color: #776a6e; line-height: 1.55;">
+                                                    <tr>
+                                                        <td style="padding-bottom: 2px;">
+                                                            <strong style="color: #b37f8c; width: 46px; display: inline-block;">Tel</strong>
+                                                            <a href="tel:01041653479" style="color: #594a4e; text-decoration: none;">010-4165-3479</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-bottom: 2px;">
+                                                            <strong style="color: #b37f8c; width: 46px; display: inline-block;">Email</strong>
+                                                            <a id="sigPreviewEmailLink" href="mailto:junho@junho.art" style="color: #594a4e; text-decoration: none;"><span id="sigPreviewEmail">junho@junho.art</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-bottom: 2px;">
+                                                            <strong style="color: #b37f8c; width: 46px; display: inline-block;">GitHub</strong>
+                                                            <a id="sigPreviewGithubLink" href="https://github.com/4season" target="_blank" rel="noopener noreferrer" style="color: #594a4e; text-decoration: none;"><span id="sigPreviewGithub">github.com/4season</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong style="color: #b37f8c; width: 46px; display: inline-block;">Web</strong>
+                                                            <a id="sigPreviewWebLink" href="https://junho.art" target="_blank" rel="noopener noreferrer" style="color: #86b37f; text-decoration: none; font-weight: 700;"><span id="sigPreviewWeb">junho.art</span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" height="8" style="font-size: 0; line-height: 0;">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="sig-btn-wrap">
@@ -205,7 +238,7 @@
                                         </div>
                                         <div class="card-front-body">
                                             <div class="card-front-photo-frame">
-                                                <img id="cardFrontImg" src="./img/junho_profile.jpg" alt="Profile">
+                                                <img id="cardFrontImg" src="https://junho.art/img/junho_profile.jpg" alt="Profile">
                                             </div>
                                             <div class="card-front-info">
                                                 <div class="card-front-name-row">
@@ -290,8 +323,8 @@
         <p>&copy; 2026 Junho Heo. All Rights Reserved.</p>
     </footer>
 
-    <!-- 이미지 렌더링용 숨겨진 Canvas 헬퍼 -->
-    <canvas id="canvasHelper" width="960" height="540"></canvas>
+    <!-- 이미지 렌더링용 Canvas 헬퍼 (레이아웃에 영향을 주지 않도록 숨김) -->
+    <canvas id="canvasHelper" width="960" height="540" style="display:none;"></canvas>
 
     <!-- 토스트 메시지 알림용 요소 -->
     <div id="toast" class="toast-msg">
@@ -343,6 +376,9 @@
         const cardBackResearch = document.getElementById('cardBackResearch');
         const cardBackQrImg = document.getElementById('cardBackQrImg');
 
+        // 이메일 크롬 미리보기 요소
+        const sigChromeSender = document.getElementById('sigChromeSender');
+
         // 버튼 및 토스트 캐시
         const btnCopySignature = document.getElementById('btnCopySignature');
         const btnDownloadFront = document.getElementById('btnDownloadFront');
@@ -387,6 +423,7 @@
             const profileUrl = inputProfileUrl.value;
 
             // 1. 이메일 서명 업데이트
+            sigChromeSender.textContent = email;
             sigPreviewNameKo.textContent = nameKo;
             sigPreviewNameEn.textContent = nameEn;
             sigPreviewDept.textContent = dept;
@@ -406,18 +443,14 @@
             }
 
             // 서명 프로필 이미지 업데이트 (절대경로 자동 처리 또는 대체)
-            if (profileUrl) {
-                sigPreviewImg.src = profileUrl;
-            } else {
-                sigPreviewImg.src = 'https://github.com/4season.png';
-            }
+            sigPreviewImg.src = profileUrl || 'https://junho.art/img/junho_profile.jpg';
 
             // 2. 실물 명함 앞면 업데이트
             cardFrontNameKo.textContent = nameKo;
             cardFrontNameEn.textContent = nameEn;
             cardFrontDept.textContent = dept;
             cardFrontBadge.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${title}`;
-            cardFrontImg.src = profileUrl || './img/junho_profile.jpg';
+            cardFrontImg.src = profileUrl || 'https://junho.art/img/junho_profile.jpg';
 
             // 3. 실물 명함 뒷면 업데이트
             cardBackName.textContent = `${nameKo} | ${nameEn}`;
@@ -575,7 +608,7 @@
             ctx.fillText(deptTag, w - tagWidth - 68, 72);
 
             // 5. 프로필 사진 로드 및 드로잉
-            const profileImgSrc = inputProfileUrl.value || './img/junho_profile.jpg';
+            const profileImgSrc = inputProfileUrl.value || 'https://junho.art/img/junho_profile.jpg';
             const img = await loadImage(profileImgSrc);
             
             const px = 50;
