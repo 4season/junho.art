@@ -7,7 +7,7 @@
     --accent-green: #86b37f;     /* 포인트 (어두운 녹색) */
     --accent-green-light: #c0ffb6; /* 포인트 (밝은 녹색) */
     --accent-pink: #FFB6C1;     /* 포인트 (밝은 핑크) */
-    --accent-purple: var(--accent-purple);   /* 포인트 (남보라) */
+    --accent-purple: #8c7fb3;   /* 포인트 (남보라) */
     --text-muted: #a59397;      /* 흐린 글자 */
     --border-color: #f2e8ea;    /* 테두리 색 */
     --card-radius: 18px;        /* 카드 기본 모서리 반경 */
