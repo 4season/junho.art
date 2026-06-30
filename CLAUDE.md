@@ -60,7 +60,7 @@ Cron (every 30 min):
 New colors and radii must use or extend the CSS variables in `:root` (`style.css`) — do not add raw hex values:
 
 | Variable | Value | Use |
-|---|---|---|
+| --- | --- | --- |
 | `--accent-purple` | `#8c7fb3` | Future-focus card border, timeline gradient, now-badge |
 | `--text-muted` | `#a59397` | Footer, subdued labels |
 | `--card-radius` | `18px` | Glass cards |
