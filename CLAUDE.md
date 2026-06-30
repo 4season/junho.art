@@ -21,8 +21,8 @@ python3 -m http.server 8080
 ### Pages
 
 - `index.html` + `index_en.html` — Korean and English versions of the portfolio, kept in sync manually. Sections: `#about`, `#journey`, `#skills`, `#projects`.
-- `signature.html` — standalone email signature / business card page.
-- All three pages share `style.css` and `script.js`.
+- `signature.html` — standalone email signature / business card generator. **Self-contained**: all interaction logic lives in an inline `<script>` at the bottom of the file (not in `script.js`). Default field values (name, email, phone, research interests, profile URL) are set directly in the `<input value="">` attributes and in JS element caches at the top of the script.
+- All three pages share `style.css`. `index.html` and `index_en.html` also share `script.js`; `signature.html` does not use `script.js`.
 
 ### Dynamic GitHub projects (`script.js`)
 
@@ -52,8 +52,10 @@ Cron (every 30 min):
 - **Korean/English parity**: `index.html` and `index_en.html` must stay in sync — same structure, translated content. Edit both when changing layout or sections.
 - **Project card overrides**: To change a project's display image or description without touching GitHub, edit `PROJECT_IMAGES` or `PROJECT_DESCRIPTIONS` in `script.js` (keyed by repo name).
 - **Adding a new project image**: place it in `img/`, add the mapping in `PROJECT_IMAGES`.
+- **Skills card background**: `img/—Pngtree—abstract white green and gold_16458333.jpg` is used as the fluid marble texture for `.skills-card` backgrounds. Regular cards use `::before`, `.future-focus-card` uses `::after` (its `::before` is reserved for the gradient glow effect). Card base is a pink→white→mint gradient using `#FFB6C1` / `#C0FFB6`. Do not animate `.skills-blob` or add full-section overlays — causes severe performance regression.
 - **Favicon assets** live in `favicon/` (not `favicon_io/`).
 - `pinned-repos.json` is gitignored — it's generated at runtime on the server.
+- **Profile image URLs** in `signature.html` must be absolute (`https://junho.art/img/...`) so email recipients can load them. Never use relative paths.
 
 ## CSS conventions
 
@@ -61,16 +63,27 @@ New colors and radii must use or extend the CSS variables in `:root` (`style.css
 
 | Variable | Value | Use |
 | --- | --- | --- |
+| `--bg-color` | `#fff9fb` | Page background |
+| `--text-color` | `#594a4e` | Body text |
+| `--heading-color` | `#b37f8c` | Headings, logo, accents |
+| `--accent-green` | `#86b37f` | Active state (lang toggle, hover), badges |
+| `--accent-green-light` | `#c0ffb6` | Background blob, toast icon |
 | `--accent-purple` | `#8c7fb3` | Future-focus card border, timeline gradient, now-badge |
 | `--text-muted` | `#a59397` | Footer, subdued labels |
+| `--border-color` | `#f2e8ea` | Card borders, dividers |
 | `--card-radius` | `18px` | Glass cards |
 | `--pill-radius` | `50px` | Badge / now-badge shapes |
+
+> **Note**: `--accent-purple` was previously defined as `var(--accent-purple)` (self-referential, resolved to invalid). It is now correctly set to `#8c7fb3`.
 
 Language toggle markup uses dedicated CSS classes — do not add inline styles:
 
 - `.lang-toggle-container` — the pill wrapper in the desktop header
 - `.mobile-lang-toggle` — the drawer equivalent
-- `.lang-active` / `.lang-sep` / `.lang-inactive` — active language, separator, and switchable link
+- `.lang-active` — active language label (color: `--accent-green`)
+- `.lang-sep` / `.lang-inactive` — separator and switchable link
+
+The `.lang-active` / `.lang-inactive` classes also apply inside `.mobile-lang-toggle`. The active language is always a `<span>`, the inactive one is an `<a>`. The `.nav-drawer a` and `.desktop-nav a` rules override font-size/margin on anchor tags, so any anchor inside these toggles needs the CSS overrides already present in `style.css` (`.nav-drawer .mobile-lang-toggle a` and `.desktop-nav .lang-toggle-container a`).
 
 Footer uses `.contact-line` and `.sep` classes (defined in `style.css`) — no inline styles needed.
 
