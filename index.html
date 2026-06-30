@@ -91,7 +91,7 @@
         <div class="mobile-lang-toggle">
             <span class="lang-active">KO</span>
             <span class="lang-sep">|</span>
-            <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" class="lang-inactive">EN</a>
+            <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html' + window.location.hash;" class="lang-inactive">EN</a>
         </div>
     </div>
 
@@ -108,7 +108,7 @@
                 <span class="lang-toggle-container">
                     <span class="lang-active">KO</span>
                     <span class="lang-sep">|</span>
-                    <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" class="lang-inactive">EN</a>
+                    <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html' + window.location.hash;" class="lang-inactive">EN</a>
                 </span>
             </nav>
             <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">
@@ -130,12 +130,13 @@
                 </div>
                 <h1>안녕하세요, 예비 연구자 허준호입니다.</h1>
                 <p class="hero-lead">백석대학교에서 컴퓨터공학을 전공하며, 계산신경과학과 계산정신의학의 관점에서 인간의 학습과 의사결정을 탐구하는 <strong>학부연구생</strong>입니다.</p>
-                <p class="hero-motto">Turning complexity into clarity is an art.</p>
+                <p class="hero-motto">Finding structure in complex problems is an art.</p>
 
                 <div class="hero-quote glass-card">
                     <i class="fa-solid fa-quote-left quote-icon" aria-hidden="true"></i>
-                    <p>ADHD, 기면병, 난독증이라는 인지적·정신의학적 어려움을 겪으며, 주의와 각성 상태에 따라 학습 효율과 의사결정 방식이 크게 달라지는 경험을 해왔습니다. 처음에는 이를 개인적인 장애물로만 여겼지만, 점차 이러한 차이를 <strong>계산적·인지적 과정의 개인차</strong>로 설명할 수 있다는 학문적 문제의식을 갖게 되었습니다.</p>
-                    <p>컴퓨터공학을 기반으로 기계학습과 인공신경망 모델링을 학습하면서, 데이터로부터 인간의 행동과 학습을 설명하는 계산 모델(Computational model)의 필요성을 깨달았습니다. 제 목표는 행동 및 신경 데이터를 계산신경과학적 방법으로 분석하여, 인지적 어려움이 개인의 잠재력을 제한하는 기전을 규명하고 개인별 개입을 돕는 <strong>계산정신의학(Computational Psychiatry)</strong> 연구자가 되는 것입니다.</p>
+                    <p>ADHD, 기면병, 난독증은 때로 단점처럼 보일 수 있지만, 저에게는 인간의 인지와 학습을 더 깊이 이해하게 만든 가장 큰 원동력이자 장점입니다. 주의, 각성, 학습 효율의 변동을 직접 경험하며, 같은 정보를 접하더라도 사람마다 처리 방식과 의사결정이 달라지는 이유에 관심을 갖게 되었습니다.</p>
+                    <p>저는 이러한 차이를 <strong>계산적·인지적 과정의 개인차</strong>로 이해하고 설명하고자 합니다. 컴퓨터공학을 기반으로 데이터 전처리, 기계학습 모델 구현, 행동 및 신경 데이터 분석의 기초를 쌓으며, 개인의 어려움이 잠재력을 제한하는 방식과 이를 도울 수 있는 계산적 접근을 탐구하고 있습니다.</p>
+                    <p>제 목표는 계산 모델과 행동·신경 데이터를 활용해 인간의 학습과 의사결정을 연구하고, 개인별 이해와 개입을 돕는 <strong>계산신경과학(Computational Neuroscience)</strong>과 <strong>계산정신의학(Computational Psychiatry)</strong>의 접점에서 연구자로 성장하는 것입니다.</p>
                 </div>
             </div>
         </section>
@@ -269,33 +270,46 @@
         <!-- 핵심 역량 섹션 (Skills) -->
         <section id="skills" class="section reveal-on-scroll">
             <h2><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Learning & Skills</h2>
-            <p class="section-desc">계산신경과학과 계산정신의학 연구로 확장하기 위해 쌓아온 기술 역량과 앞으로 깊이 있게 다룰 연구 영역입니다.</p>
+            <p class="section-desc">계산신경과학과 계산정신의학 연구로 확장하기 위해 쌓아온 기반과 현재 집중하고 있는 연구 관심사입니다.</p>
 
             <div class="skills-grid">
-                <!-- 역량 1: Learned & Applied -->
+                <!-- 역량 1: Research Interests -->
                 <div class="skills-card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
-                    <h3>Hands-on & Applied</h3>
-                    <p class="card-sub">프로젝트를 통해 직접 적용해 본 기술</p>
+                    <div class="card-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+                    <h3>Research Interests</h3>
+                    <p class="card-sub">앞으로 깊이 있게 다루고 싶은 연구 주제</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Python, C++ 기반 데이터 분석 및 알고리즘 구현</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> MLP & CNN 기반 기계학습 모델 구현 및 실험 설계</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 정형 · 비정형 데이터 분석 및 목적에 맞춘 데이터셋 전처리</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Git 환경을 이용한 협업 및 소스코드 버전 제어</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 계산신경과학(Computational Neuroscience)</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 강화학습과 의사결정 모델링</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 행동 및 신경 데이터 분석</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 계산정신의학(Computational Psychiatry)</li>
                     </ul>
                 </div>
 
-                <!-- 역량 2: Future Target -->
+                <!-- 역량 2: Current Foundation -->
+                <div class="skills-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
+                    <h3>Current Foundation</h3>
+                    <p class="card-sub">프로젝트를 통해 직접 쌓아온 기술 기반</p>
+                    <ul class="skills-list">
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Python, C++ 기반 데이터 분석 및 알고리즘 구현</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> MLP & CNN 기반 기계학습 모델 구현 및 실험 설계</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 정형·비정형 데이터 전처리와 분석</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 백엔드 개발, API 시스템, Git 기반 협업</li>
+                    </ul>
+                </div>
+
+                <!-- 역량 3: Future Target -->
                 <div class="skills-card glass-card future-focus-card">
                     <div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
                     <h3>Research & Future Focus</h3>
-                    <p class="card-sub">앞으로 전문적으로 배우고자 하는 핵심 도메인</p>
+                    <p class="card-sub">현재 기반을 확장해 나갈 연구 방향</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 기초 신경과학(Neuroscience) 및 인지과학(Cognitive Science) 학습</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI 기반 뇌신경 신호 데이터 전처리 및 분석 기술</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 행동 데이터와 뇌신경 데이터를 활용한 인지적 개인차 계산 모델링</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 강화학습, 확률적 모델링 및 계산신경과학의 수학적 기초</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 계산정신의학 관점의 질환 기전 연구 및 개입 기법 설계</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 강화학습과 확률적 모델링</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 행동 및 신경 데이터의 계산적 분석</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI 기반 신경 신호 전처리</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 인지적 개인차와 의사결정 과정 모델링</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 계산신경과학·계산정신의학 기반 개인별 개입 모델</li>
                     </ul>
                 </div>
             </div>

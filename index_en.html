@@ -95,7 +95,7 @@
         <a href="#projects">Projects</a>
         <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer">GitHub</a>
         <div class="mobile-lang-toggle">
-            <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" class="lang-inactive">KO</a>
+            <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html' + window.location.hash;" class="lang-inactive">KO</a>
             <span class="lang-sep">|</span>
             <span class="lang-active">EN</span>
         </div>
@@ -112,7 +112,7 @@
                 <a href="#projects">Projects</a>
                 <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer" class="github-nav-link">GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 <span class="lang-toggle-container">
-                    <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" class="lang-inactive">KO</a>
+                    <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html' + window.location.hash;" class="lang-inactive">KO</a>
                     <span class="lang-sep">|</span>
                     <span class="lang-active">EN</span>
                 </span>
@@ -136,12 +136,13 @@
                 </div>
                 <h1>Hello, I'm Junho Heo, an aspiring researcher.</h1>
                 <p class="hero-lead">I am a computer science undergraduate researcher at Baekseok University, exploring human learning and decision-making through Computational Neuroscience and Computational Psychiatry.</p>
-                <p class="hero-motto">Turning complexity into clarity is an art.</p>
+                <p class="hero-motto">Finding structure in complex problems is an art.</p>
 
                 <div class="hero-quote glass-card">
                     <i class="fa-solid fa-quote-left quote-icon" aria-hidden="true"></i>
-                    <p>Having lived with cognitive and psychiatric challenges such as ADHD, narcolepsy, and dyslexia, I experienced firsthand how learning efficiency and decision-making can vary with attention and arousal states. What began as a personal struggle gradually became a scientific question: can these differences be explained as individual variation in <strong>computational and cognitive processes</strong>?</p>
-                    <p>Through computer science, machine learning, and neural network modeling, I came to see the need for computational models that connect data with human behavior and learning. My goal is to become a researcher in <strong>Computational Psychiatry</strong>, using computational neuroscience methods to analyze behavioral and neural data, clarify the mechanisms behind cognitive difficulties, and support personalized interventions.</p>
+                    <p>ADHD, narcolepsy, and dyslexia may sometimes be seen as disadvantages, but for me they have become one of my strongest sources of motivation and perspective. My experiences with variations in attention, arousal, and learning efficiency led me to ask why people process the same information differently and make different decisions.</p>
+                    <p>I aim to understand these differences as individual variation in <strong>computational and cognitive processes</strong>. Through computer science, I have been building a foundation in data preprocessing, machine learning model implementation, and behavioral and neural data analysis while exploring how cognitive difficulties can shape, and sometimes limit, individual potential.</p>
+                    <p>My goal is to study human learning and decision-making with computational models, behavioral data, and neural data, and to grow as a researcher at the intersection of <strong>Computational Neuroscience</strong> and <strong>Computational Psychiatry</strong>.</p>
                 </div>
             </div>
         </section>
@@ -271,33 +272,46 @@
         <!-- Learning & Skills Section -->
         <section id="skills" class="section reveal-on-scroll">
             <h2><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Learning & Skills</h2>
-            <p class="section-desc">Technical skills I have built so far, and research areas I plan to deepen for Computational Neuroscience and Computational Psychiatry.</p>
+            <p class="section-desc">The foundation I have built so far, and the research questions I am now developing toward Computational Neuroscience and Computational Psychiatry.</p>
 
             <div class="skills-grid">
-                <!-- Skill Card 1: Learned & Applied -->
+                <!-- Skill Card 1: Research Interests -->
                 <div class="skills-card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
-                    <h3>Hands-on & Applied</h3>
-                    <p class="card-sub">Technologies I have directly applied through projects</p>
+                    <div class="card-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+                    <h3>Research Interests</h3>
+                    <p class="card-sub">Research areas I plan to study in depth</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Data analysis & algorithm implementation using Python and C++</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Machine learning model implementation & experimental design (MLP, CNN)</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Structured/unstructured data analysis & purpose-specific dataset pre-processing</li>
-                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Collaboration & source code version control using Git</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Computational neuroscience</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Reinforcement learning and decision-making</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Behavioral and neural data analysis</li>
+                        <li><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Computational psychiatry</li>
                     </ul>
                 </div>
 
-                <!-- Skill Card 2: Future Target -->
+                <!-- Skill Card 2: Current Foundation -->
+                <div class="skills-card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
+                    <h3>Current Foundation</h3>
+                    <p class="card-sub">Technical skills I have applied through projects</p>
+                    <ul class="skills-list">
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Data analysis & algorithm implementation using Python and C++</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Machine learning model implementation & experimental design (MLP, CNN)</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Structured/unstructured data preprocessing and analysis</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Backend development, API systems, and Git-based collaboration</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Card 3: Future Target -->
                 <div class="skills-card glass-card future-focus-card">
                     <div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
                     <h3>Research & Future Focus</h3>
-                    <p class="card-sub">Core research domains I plan to study professionally in the future</p>
+                    <p class="card-sub">How I am expanding this foundation</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Foundational study in neuroscience & cognitive science</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI-based neural signal pre-processing & analysis</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Computational modeling of cognitive individual differences based on behavioral & neural data</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Mathematical study of reinforcement learning, probabilistic modeling, and computational neuroscience</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Characterizing disease mechanisms & designing intervention methods in Computational Psychiatry</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Reinforcement learning and probabilistic modeling</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Computational analysis of behavioral and neural data</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI-based neural signal preprocessing</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Modeling individual differences in cognition and decision-making</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Personalized intervention models grounded in Computational Neuroscience and Computational Psychiatry</li>
                     </ul>
                 </div>
             </div>
