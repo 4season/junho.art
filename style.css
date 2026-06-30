@@ -514,6 +514,52 @@ header {
     text-align: center;
 }
 
+/* Skills 카드 유체 아트 배경 (정적 — 애니메이션 없음) */
+.skills-card {
+    position: relative;
+    overflow: hidden;
+}
+.skills-card > * {
+    position: relative;
+    z-index: 1;
+}
+/* 일반 카드 — 세이지 그린/골드 대리석 수채화 */
+.skills-card:not(.future-focus-card)::before {
+    content: '';
+    position: absolute;
+    inset: -22px;
+    background:
+        radial-gradient(ellipse 180% 120% at -5%  110%, rgba(148, 195, 165, 0.72) 0%, transparent 48%),
+        radial-gradient(ellipse 120% 180% at 108% -5%,  rgba(135, 188, 158, 0.62) 0%, transparent 48%),
+        radial-gradient(ellipse 100% 90%  at 68%  88%,  rgba(155, 200, 172, 0.48) 0%, transparent 42%),
+        radial-gradient(ellipse 80%  60%  at 38%  18%,  rgba(208, 172, 62,  0.52) 0%, transparent 36%),
+        radial-gradient(ellipse 60%  80%  at 88%  62%,  rgba(200, 162, 55,  0.42) 0%, transparent 36%),
+        radial-gradient(circle              at 50%  50%,  rgba(255, 255, 255, 1.0)  0%, transparent 52%),
+        #fffef8;
+    filter: blur(20px);
+    z-index: 0;
+}
+/* Future Focus 카드 — 퍼플/세이지/골드 (::after 사용, ::before는 기존 테두리 효과 유지) */
+.future-focus-card::after {
+    content: '';
+    position: absolute;
+    inset: -22px;
+    background:
+        radial-gradient(ellipse 180% 120% at -5%  110%, rgba(140, 127, 179, 0.60) 0%, transparent 48%),
+        radial-gradient(ellipse 120% 180% at 108% -5%,  rgba(148, 195, 165, 0.65) 0%, transparent 48%),
+        radial-gradient(ellipse 100% 90%  at 68%  88%,  rgba(208, 172, 62,  0.42) 0%, transparent 42%),
+        radial-gradient(ellipse 80%  60%  at 38%  18%,  rgba(195, 190, 225, 0.50) 0%, transparent 36%),
+        radial-gradient(circle              at 50%  50%,  rgba(255, 255, 255, 1.0)  0%, transparent 52%),
+        #fffef8;
+    filter: blur(20px);
+    z-index: 0;
+}
+#skills .glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
 /* 프로젝트 그리드 및 카드 */
 .project-grid {
     display: grid;
