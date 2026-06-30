@@ -13,7 +13,7 @@
             }
             
             const savedLang = localStorage.getItem('user-language');
-            const browserLang = navigator.language || navigator.userLanguage;
+            const browserLang = navigator.language;
             
             // 세션 체크 완료 플래그 설정
             sessionStorage.setItem('lang-redirect-checked', 'true');
@@ -32,12 +32,12 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junho Heo | Undergraduate Researcher</title>
-    <meta name="description" content="허준호 | 백석대학교 컴퓨터공학 전공 학부연구생. 기계학습 모델링과 계산정신의학(Computational Psychiatry)을 통해 뇌와 마음의 계산적 원리를 탐구합니다.">
+    <meta name="description" content="허준호 | 컴퓨터공학 전공 학부연구생. 계산신경과학(Computational Neuroscience)과 계산정신의학(Computational Psychiatry)을 통해 뇌와 마음의 계산적 원리를 탐구합니다.">
 
     <!-- Open Graph (카카오톡, 페이스북, 디스코드 등 링크 미리보기) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="junho.art — Undergraduate Researcher">
-    <meta property="og:description" content="기계학습 & 계산정신의학을 연구하는 학부연구생 허준호의 포트폴리오">
+    <meta property="og:description" content="계산신경과학 & 계산정신의학을 연구하는 학부연구생 허준호의 포트폴리오">
     <meta property="og:image" content="https://junho.art/img/og_preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -48,7 +48,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="junho.art — Undergraduate Researcher">
-    <meta name="twitter:description" content="기계학습 & 계산정신의학을 연구하는 학부연구생 허준호의 포트폴리오">
+    <meta name="twitter:description" content="계산신경과학 & 계산정신의학을 연구하는 학부연구생 허준호의 포트폴리오">
     <meta name="twitter:image" content="https://junho.art/img/og_preview.png">
 
     <link rel="stylesheet" href="style.css">
@@ -66,6 +66,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
     <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="canonical" href="https://junho.art/">
+    <link rel="alternate" hreflang="ko" href="https://junho.art/">
+    <link rel="alternate" hreflang="en" href="https://junho.art/index_en.html">
 </head>
 
 <body>
@@ -79,16 +82,16 @@
 
     <!-- 모바일/태블릿용 네비게이션 드로어 -->
     <div class="nav-drawer" id="navDrawer">
-        <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="close-btn" id="closeBtn" aria-label="Close navigation menu">&times;</button>
         <a href="#about">소개</a>
         <a href="#journey">여정</a>
         <a href="#skills">역량 및 계획</a>
         <a href="#projects">프로젝트</a>
-        <a href="https://github.com/4season" target="_blank">GitHub</a>
-        <div class="mobile-lang-toggle" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; gap: 1rem; font-size: 1.1rem; font-weight: 700;">
-            <span style="color: var(--heading-color);">KO</span>
-            <span style="opacity: 0.3;">|</span>
-            <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" style="color: var(--text-color); text-decoration: none;">EN</a>
+        <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <div class="mobile-lang-toggle">
+            <span class="lang-active">KO</span>
+            <span class="lang-sep">|</span>
+            <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" class="lang-inactive">EN</a>
         </div>
     </div>
 
@@ -101,16 +104,15 @@
                 <a href="#journey">여정</a>
                 <a href="#skills">역량 및 계획</a>
                 <a href="#projects">프로젝트</a>
-                <a href="https://github.com/4season" target="_blank" style="margin-right: 1.5rem;">GitHub <i
-                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                <span class="lang-toggle-container" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border-color); padding: 0.2rem 0.6rem; border-radius: 20px; background-color: rgba(255,255,255,0.5);">
-                    <span style="color: var(--heading-color);">KO</span>
-                    <span style="opacity: 0.3;">|</span>
-                    <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" style="color: var(--text-color); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-color)'">EN</a>
+                <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer" class="github-nav-link">GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <span class="lang-toggle-container">
+                    <span class="lang-active">KO</span>
+                    <span class="lang-sep">|</span>
+                    <a href="index_en.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'en'); window.location.href='index_en.html';" class="lang-inactive">EN</a>
                 </span>
             </nav>
-            <button class="menu-btn" id="menuBtn">
-                <i class="fa-solid fa-bars"></i>
+            <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
@@ -124,24 +126,24 @@
                     <div class="profile-img-container">
                         <img src="./img/junho_profile.jpg" alt="프로필 이미지" class="profile-img-internal">
                     </div>
-                    <div class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> Undergraduate Researcher</div>
+                    <div class="profile-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Undergraduate Researcher</div>
                 </div>
-                <h1>안녕하세요, 예비 연구자 Junho Heo입니다.</h1>
-                <p class="hero-lead">백석대학교에서 컴퓨터학을 전공하며, 계산신경과학과 인공지능의 접점을 탐구하고 있는 <strong>학부연구생</strong>입니다.</p>
-                <p class="hero-motto" style="font-size: 1.25rem; font-weight: 500;">Turning complexity into clarity is an art.</p>
+                <h1>안녕하세요, 예비 연구자 허준호입니다.</h1>
+                <p class="hero-lead">백석대학교에서 컴퓨터공학을 전공하며, 계산신경과학과 계산정신의학의 관점에서 인간의 학습과 의사결정을 탐구하는 <strong>학부연구생</strong>입니다.</p>
+                <p class="hero-motto">Turning complexity into clarity is an art.</p>
 
                 <div class="hero-quote glass-card">
-                    <i class="fa-solid fa-quote-left quote-icon"></i>
-                    <p>ADHD, 기면병, 난독증이라는 인지적·정신의학적 어려움을 겪으며, 주의와 각성 상태에 따라 학습 효율이 크게 달라지는 개인적인 경험을 해왔습니다. 처음에는 이를 장애물로만 여겼으나, 점차 사람마다 서로 다른 학습 과정과 의사결정이 나타나는 이유를 <strong>계산적·인지적 과정의 차이</strong>로 규명할 수 있지 않을까 하는 학문적 질문을 갖게 되었습니다.</p>
-                    <p style="margin-top: 1.2rem;">컴퓨터공학을 기반으로 기계학습 모델링을 학습하면서, 인공신경망의 해석 한계를 넘어서 인간의 행동과 학습을 정교하게 설명하는 계산 모델(Computational model)의 필요성을 깨달았습니다. 제 목표는 행동 및 신경 데이터를 계산신경과학적 모델로 연구하여, 인지적 어려움이 개인의 잠재력을 제한하는 기전을 규명하고 개인별 개입을 돕는 <strong>계산정신의학(Computational Psychiatry)</strong> 연구자가 되는 것입니다.</p>
+                    <i class="fa-solid fa-quote-left quote-icon" aria-hidden="true"></i>
+                    <p>ADHD, 기면병, 난독증이라는 인지적·정신의학적 어려움을 겪으며, 주의와 각성 상태에 따라 학습 효율과 의사결정 방식이 크게 달라지는 경험을 해왔습니다. 처음에는 이를 개인적인 장애물로만 여겼지만, 점차 이러한 차이를 <strong>계산적·인지적 과정의 개인차</strong>로 설명할 수 있다는 학문적 문제의식을 갖게 되었습니다.</p>
+                    <p>컴퓨터공학을 기반으로 기계학습과 인공신경망 모델링을 학습하면서, 데이터로부터 인간의 행동과 학습을 설명하는 계산 모델(Computational model)의 필요성을 깨달았습니다. 제 목표는 행동 및 신경 데이터를 계산신경과학적 방법으로 분석하여, 인지적 어려움이 개인의 잠재력을 제한하는 기전을 규명하고 개인별 개입을 돕는 <strong>계산정신의학(Computational Psychiatry)</strong> 연구자가 되는 것입니다.</p>
                 </div>
             </div>
         </section>
 
         <!-- 여정 섹션 (Timeline) -->
         <section id="journey" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-route-highway"></i> My Journey</h2>
-            <p class="section-desc">학업과 개발, 그리고 연구를 위한 기초를 다져가고 있는 학부연구생으로서의 발자취입니다.</p>
+            <h2><i class="fa-solid fa-route" aria-hidden="true"></i> My Journey</h2>
+            <p class="section-desc">컴퓨터공학을 기반으로 계산신경과학과 계산정신의학 연구 역량을 쌓아가는 과정입니다.</p>
 
             <div class="timeline">
                 <div class="timeline-line-bg"></div>
@@ -149,7 +151,7 @@
 
                 <!-- 타임라인 아이템 1: 백석대학교 입학 & 장학 -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-university"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Education | 2021 Spring ~</span>
@@ -162,48 +164,48 @@
 
                 <!-- 타임라인 아이템 2: UML 경진대회 우수상 -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Award | 2023 Fall</span>
                             <span class="timeline-tag award-tag">수상</span>
                         </div>
                         <h3>UML 객체지향 모델링 경진대회 우수상</h3>
-                        <p>시스템 컴포넌트 간 상호작용과 데이터 흐름을 설계하여 <strong>우수상(Excellence Award)</strong>을 수상했습니다. 시스템의 복잡한 컴포넌트 간 상호작용과 흐름을 논리적으로 정의하며, 문제를 구조화하고 이를 계산적 모델로 표현해 보는 첫 디딤돌이 되었습니다.</p>
+                        <p>시스템 컴포넌트 간 상호작용과 데이터 흐름을 설계하여 <strong>우수상(Excellence Award)</strong>을 수상했습니다. 복잡한 문제를 구조화하고 논리적 모델로 표현하는 경험은 이후 계산 모델링에 관심을 갖게 된 중요한 출발점이 되었습니다.</p>
                     </div>
                 </div>
 
                 <!-- 타임라인 아이템 3: 교수추천장학금 -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Honor | 24 Spring, 25 Fall & 26 Spring</span>
                             <span class="timeline-tag honor-tag">장학</span>
                         </div>
                         <h3>교수추천 장학금 3회 수혜</h3>
-                        <p>학업성적과 연구 성실함을 인정받아 지도교수님의 추천으로 <strong>교수추천장학금(2024년 1학기, 2025년 2학기, 2026년 1학기)</strong>을 총 3회 수혜받았습니다.
-                            예비 연구자로서 가능성을 차근차근 넓혀가는 계기가 되었습니다.</p>
+                        <p>학업 성취와 연구 활동의 성실성을 인정받아 지도교수님의 추천으로 <strong>교수추천장학금(2024년 1학기, 2025년 2학기, 2026년 1학기)</strong>을 총 3회 수혜받았습니다.
+                            예비 연구자로서 연구 방향을 구체화하고 꾸준히 성장해 가는 계기가 되었습니다.</p>
                     </div>
                 </div>
 
                 <!-- 타임라인 아이템 4: DIP 대외활동 수료 -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-users"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Activity | 2025 August</span>
                             <span class="timeline-tag activity-tag">대외활동</span>
                         </div>
                         <h3>DIP SW융합인재 양성 프로그램 수료</h3>
-                        <p>대구디지털혁신진흥원(DIP) 주관의 <strong>SW융합인재 양성 프로그램</strong>을 수료하여 소프트웨어 융합 개발 기술과 팀 프로젝트를 통한 협업 능력을
-                            확장했습니다.</p>
+                        <p>대구디지털혁신진흥원(DIP) 주관의 <strong>SW융합인재 양성 프로그램</strong>을 수료하며 소프트웨어 융합 개발 역량과 팀 프로젝트 기반 협업 경험을
+                            쌓았습니다.</p>
                     </div>
                 </div>
 
                 <!-- 타임라인 아이템 5: Magnolia & AI 프로젝트 -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-gears"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-gears" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Projects | 2025 Fall ~ Present</span>
@@ -217,7 +219,7 @@
 
                 <!-- 타임라인 아이템 6: Brain-AI Interface (BAI) lab 학부연구생 -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Research | 2026 Summer ~ Present</span>
@@ -225,20 +227,20 @@
                         </div>
                         <h3>Brain-AI Interface (BAI) lab 학부연구생</h3>
                         <p>Brain-AI Interface (BAI) lab에 학부연구생으로 참여하여, 초기 연구 환경을 구축하고 뉴럴 데이터 파이프라인의 전처리 과정과 분석 흐름을 익히고 있습니다. 실무 연구
-                            현장을 경험하며 향후 목표인 <strong>계산정신의학(Computational Psychiatry)</strong> 분야의 연구 기초를 다져가고 있습니다.</p>
+                            현장을 경험하며 <strong>계산신경과학</strong>과 <strong>계산정신의학(Computational Psychiatry)</strong> 분야로 이어지는 연구 기초를 다져가고 있습니다.</p>
                     </div>
                 </div>
 
                 <!-- 실시간 현재 위치 구분 노드 -->
                 <div class="timeline-now-node">
                     <div class="now-badge">
-                        <i class="fa-solid fa-location-crosshairs fa-spin"></i> 현재 여정 Loading...
+                        <i class="fa-solid fa-location-crosshairs fa-spin" aria-hidden="true"></i> 현재 진행 중
                     </div>
                 </div>
 
                 <!-- 타임라인 아이템 7: 졸업 예정 -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Education | 2027 February (Expected)</span>
@@ -251,14 +253,14 @@
 
                 <!-- 타임라인 아이템 8: 미래 로드맵 -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-dna"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-dna" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Future Roadmap | 대학원 진학</span>
                             <span class="timeline-tag future-tag">연구 계획</span>
                         </div>
                         <h3>뇌신경 데이터와 인지과학의 계산적 모델링 연구</h3>
-                        <p>대학원에서 강화학습, 확률적 모델링, 계산신경과학을 체계적으로 연구하여, 행동 데이터와 뇌신경 데이터(EEG/fMRI)를 기반으로 인지적·정신의학적 개인차를 정량화하고 개인별 진단 및 개입을 돕는 계산 모델을 규명하고자 합니다.</p>
+                        <p>대학원에서 강화학습, 확률적 모델링, 계산신경과학을 체계적으로 연구하여, 행동 데이터와 뇌신경 데이터(EEG/fMRI)를 기반으로 인지적·정신의학적 개인차를 정량화하고 개인별 진단 및 개입을 돕는 계산 모델을 개발하고자 합니다.</p>
                     </div>
                 </div>
             </div>
@@ -266,34 +268,34 @@
 
         <!-- 핵심 역량 섹션 (Skills) -->
         <section id="skills" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-graduation-cap"></i> Learning & Skills</h2>
-            <p class="section-desc">학부에서 직접 경험하고 공부한 기술들과 예비 연구자로서 앞으로 깊이 있게 연구하고 싶은 관심 분야입니다.</p>
+            <h2><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Learning & Skills</h2>
+            <p class="section-desc">계산신경과학과 계산정신의학 연구로 확장하기 위해 쌓아온 기술 역량과 앞으로 깊이 있게 다룰 연구 영역입니다.</p>
 
             <div class="skills-grid">
                 <!-- 역량 1: Learned & Applied -->
                 <div class="skills-card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Hands-on & Applied</h3>
                     <p class="card-sub">프로젝트를 통해 직접 적용해 본 기술</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Python, C++ 기반 데이터 분석 및 알고리즘 구현</li>
-                        <li><i class="fa-solid fa-circle-check"></i> MLP & CNN 기반 기계학습 모델 구현 및 실험 설계</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 정형 · 비정형 데이터 분석 및 목적에 맞춘 데이터셋 전처리</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Git 환경을 이용한 협업 및 소스코드 버전 제어</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Python, C++ 기반 데이터 분석 및 알고리즘 구현</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> MLP & CNN 기반 기계학습 모델 구현 및 실험 설계</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 정형 · 비정형 데이터 분석 및 목적에 맞춘 데이터셋 전처리</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Git 환경을 이용한 협업 및 소스코드 버전 제어</li>
                     </ul>
                 </div>
 
                 <!-- 역량 2: Future Target -->
                 <div class="skills-card glass-card future-focus-card">
-                    <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
                     <h3>Research & Future Focus</h3>
                     <p class="card-sub">앞으로 전문적으로 배우고자 하는 핵심 도메인</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 기초 신경과학(Neuroscience) 및 인지과학(Cognitive Science) 학습</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> EEG/fMRI 기반 뇌신경 신호 데이터 전처리 및 분석 기술</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 행동 데이터와 뇌신경 데이터를 활용한 인지적 개인차 계산 모델링</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 강화학습, 확률적 모델링 및 계산신경과학 이론 수학</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> 계산정신의학 관점의 질환 기전 연구 및 개입 기법 설계</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 기초 신경과학(Neuroscience) 및 인지과학(Cognitive Science) 학습</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI 기반 뇌신경 신호 데이터 전처리 및 분석 기술</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 행동 데이터와 뇌신경 데이터를 활용한 인지적 개인차 계산 모델링</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 강화학습, 확률적 모델링 및 계산신경과학의 수학적 기초</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> 계산정신의학 관점의 질환 기전 연구 및 개입 기법 설계</li>
                     </ul>
                 </div>
             </div>
@@ -301,7 +303,7 @@
 
         <!-- 프로젝트 섹션 -->
         <section id="projects" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-cubes"></i> Selected Works</h2>
+            <h2><i class="fa-solid fa-cubes" aria-hidden="true"></i> Selected Works</h2>
             <p class="section-desc">학습한 개념을 실제 문제에 적용하며 구현한 주요 프로젝트입니다.</p>
             <div class="project-grid" id="projectGrid">
                 <!-- script.js에 의해 동적으로 로드되는 영역입니다 -->
@@ -310,8 +312,7 @@
 
             <!-- 깃허브 아웃링크 배너 (강조 완화형) -->
             <div class="github-footer-note glass-card reveal-on-scroll">
-                <p><i class="fa-brands fa-github"></i> 프로젝트 코드와 개발·실험 기록은 <a href="https://github.com/4season"
-                        target="_blank">Junho Heo의 GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>에서 확인할 수 있습니다.</p>
+                <p><i class="fa-brands fa-github" aria-hidden="true"></i> 프로젝트 코드와 개발·실험 기록은 <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer">Junho Heo의 GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>에서 확인할 수 있습니다.</p>
             </div>
         </section>
 
@@ -319,15 +320,11 @@
 
     <!-- 푸터 영역 -->
     <footer>
-        <p>&copy; 2026 Junho Heo. <a href="./LICENSE" target="_blank"
-                style="color: inherit; text-decoration: underline;">All Rights Reserved</a>.
-        </p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">
-            <i class="fa-solid fa-envelope"></i> Contact: <a href="mailto:contact@junho.art"
-                style="color: inherit; text-decoration: underline;">contact@junho.art</a>
-            <span style="margin: 0 10px; opacity: 0.5;">|</span>
-            <i class="fa-solid fa-id-card"></i> <a href="./signature.html"
-                style="color: inherit; text-decoration: underline;">명함 & 서명 생성기</a>
+        <p>&copy; 2026 Junho Heo. <a href="./LICENSE" target="_blank" rel="noopener noreferrer">All Rights Reserved</a>.</p>
+        <p class="contact-line">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact: <a href="mailto:contact@junho.art">contact@junho.art</a>
+            <span class="sep">|</span>
+            <i class="fa-solid fa-id-card" aria-hidden="true"></i> <a href="./signature.html">명함 & 서명 생성기</a>
         </p>
     </footer>
 

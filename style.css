@@ -7,7 +7,11 @@
     --accent-green: #86b37f;     /* 포인트 (어두운 녹색) */
     --accent-green-light: #c0ffb6; /* 포인트 (밝은 녹색) */
     --accent-pink: #FFB6C1;     /* 포인트 (밝은 핑크) */
+    --accent-purple: var(--accent-purple);   /* 포인트 (남보라) */
+    --text-muted: #a59397;      /* 흐린 글자 */
     --border-color: #f2e8ea;    /* 테두리 색 */
+    --card-radius: 18px;        /* 카드 기본 모서리 반경 */
+    --pill-radius: 50px;        /* 알약형 모서리 반경 */
     --font-family: 'Gowun Dodum', sans-serif; /* 기본 폰트 */
 }
 
@@ -133,7 +137,34 @@ header {
     transition: color 0.3s;
 }
 .desktop-nav a:hover { color: var(--accent-green); }
+.desktop-nav .github-nav-link { margin-right: 1.5rem; }
+.lang-toggle-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid var(--border-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.5);
+}
+.lang-active { color: var(--heading-color); }
+.lang-sep { opacity: 0.3; }
+.lang-inactive { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
+.lang-inactive:hover { color: var(--accent-green); }
 .menu-btn { display: none; }
+
+/* 모바일 드로어 언어 토글 */
+.mobile-lang-toggle {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
 
 /* 네비게이션 드로어 (모바일용) */
 .nav-drawer {
@@ -260,8 +291,8 @@ header {
     word-break: keep-all;
 }
 .hero-motto {
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 500;
     font-style: italic;
     color: var(--accent-green);
     margin: 0 auto 2rem auto;
@@ -288,6 +319,9 @@ header {
     line-height: 1.85;
     color: var(--text-color);
     margin: 0;
+}
+.hero-quote p + p {
+    margin-top: 1.2rem;
 }
 .hero-quote p strong {
     color: var(--heading-color);
@@ -316,7 +350,7 @@ header {
     top: 0;
     width: 2px;
     height: 0%;
-    background: linear-gradient(to bottom, var(--accent-green) 0%, #8c7fb3 100%);
+    background: linear-gradient(to bottom, var(--accent-green) 0%, var(--accent-purple) 100%);
     transform: translateX(-50%);
     z-index: 2;
 }
@@ -478,24 +512,6 @@ header {
     text-align: center;
 }
 
-/* 버튼 */
-.button {
-    display: inline-block;
-    background-color: var(--accent-green);
-    color: white;
-    padding: 0.8rem 2.2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    margin-top: 2.5rem;
-    transition: all 0.3s;
-    box-shadow: 0 4px 12px rgba(134, 179, 127, 0.3);
-}
-.button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(134, 179, 127, 0.4);
-}
-
 /* 프로젝트 그리드 및 카드 */
 .project-grid {
     display: grid;
@@ -563,46 +579,11 @@ header {
     font-weight: 700;
 }
 
-/* 깃허브 활동 영역 */
-.github-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    margin: 2rem 0 3rem 0;
-    align-items: stretch;
-}
-.github-stats-card {
-    padding: 1.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 220px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.github-stats-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(179, 127, 140, 0.08);
-}
-.github-stats-card img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-.calendar {
-    padding: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(179, 127, 140, 0.03);
-}
-
-/* 잔디 색상 커스텀 */
-.ContributionCalendar-day[data-level='1'] { fill: #d8f3d2; }
-.ContributionCalendar-day[data-level='2'] { fill: var(--accent-green-light); }
-.ContributionCalendar-day[data-level='3'] { fill: var(--accent-green); }
-.ContributionCalendar-day[data-level='4'] { fill: #5e8c56; }
-
 /* 푸터 */
-footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397; }
+footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: var(--text-muted); }
+footer a { color: inherit; text-decoration: underline; }
+footer .contact-line { font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8; }
+footer .sep { margin: 0 10px; opacity: 0.5; }
 
 /* 스크롤 애니메이션 효과 (Scroll-driven reveal) */
 .reveal-on-scroll {
@@ -678,6 +659,11 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
         padding: 1.5rem;
         margin-top: 2rem;
     }
+    .timeline-now-node {
+        justify-content: flex-start;
+        padding-left: 5rem;
+        margin: 1.5rem 0;
+    }
 }
 
 /* 초소형 모바일 기기 최적화 (480px 이하) */
@@ -729,7 +715,7 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
 .honor-tag { background-color: #b37f90; }     /* 장학 - 자주색 */
 .proj-tag { background-color: var(--accent-green); } /* 프로젝트 - 녹색 */
 .activity-tag { background-color: #a081a8; }  /* 대외활동 - 보라 */
-.future-tag { background-color: #8c7fb3; }    /* 미래 계획 - 남보라 */
+.future-tag { background-color: var(--accent-purple); }    /* 미래 계획 - 남보라 */
 
 /* 2단 그리드에서 Future Focus 카드에 오묘한 퍼플/그린 네온 보더 효과 부여 */
 .future-focus-card {
@@ -741,7 +727,7 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     content: '';
     position: absolute;
     top: -2px; left: -2px; right: -2px; bottom: -2px;
-    background: linear-gradient(135deg, var(--accent-green) 0%, #8c7fb3 100%);
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-purple) 100%);
     z-index: -1;
     border-radius: 20px;
     opacity: 0.15;
@@ -836,7 +822,7 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     z-index: 15;
 }
 .now-badge {
-    background: linear-gradient(135deg, var(--accent-green) 0%, #8c7fb3 100%);
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-purple) 100%);
     color: white;
     padding: 0.5rem 1.4rem;
     border-radius: 50px;
@@ -859,14 +845,6 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
         box-shadow: 0 6px 20px rgba(140, 127, 179, 0.6), 0 0 10px rgba(134, 179, 127, 0.5);
     }
 }
-@media (max-width: 768px) {
-    .timeline-now-node {
-        justify-content: flex-start;
-        padding-left: 5rem;
-        margin: 1.5rem 0;
-    }
-}
-
 /* 활성화된 타임라인 노드 및 카드 스타일 */
 .timeline-dot.active {
     background-color: var(--accent-green) !important;
@@ -1006,6 +984,7 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.85);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    -webkit-user-select: none;
     user-select: none;
     aspect-ratio: 1.777;
 }
@@ -1040,7 +1019,7 @@ footer { text-align: center; padding: 4rem 0; font-size: 0.9rem; color: #a59397;
 
 .card-univ-tag {
     font-size: 0.75rem;
-    color: #8c7fb3;
+    color: var(--accent-purple);
     font-weight: 700;
     background-color: rgba(140, 127, 179, 0.08);
     padding: 0.2rem 0.6rem;

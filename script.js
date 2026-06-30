@@ -1,32 +1,28 @@
-// DOM 요소들을 가져옵니다.
 const isEnglish = document.documentElement.lang === 'en';
 const menuBtn = document.getElementById('menuBtn');
 const closeBtn = document.getElementById('closeBtn');
 const navDrawer = document.getElementById('navDrawer');
 
-// 햄버거 메뉴 버튼을 클릭했을 때
-menuBtn.addEventListener('click', () => {
-    navDrawer.classList.add('active'); // 네비게이션 드로어에 'active' 클래스를 추가해서 보이게 함
-});
-
-// 닫기 버튼을 클릭했을 때
-closeBtn.addEventListener('click', () => {
-    navDrawer.classList.remove('active'); // 'active' 클래스를 제거해서 숨김
-});
-
-// 드로어의 링크를 클릭했을 때도 드로어가 닫히게 (선택 사항)
-const drawerLinks = navDrawer.querySelectorAll('a');
-drawerLinks.forEach(link => {
-    link.addEventListener('click', () => {
+if (menuBtn && closeBtn && navDrawer) {
+    menuBtn.addEventListener('click', () => {
+        navDrawer.classList.add('active');
+    });
+    closeBtn.addEventListener('click', () => {
         navDrawer.classList.remove('active');
     });
-});
+    navDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navDrawer.classList.remove('active');
+        });
+    });
+}
 
 // === GitHub Pinned Projects 동적 연동 로직 ===
 
-// 오라클 서버의 Cron Job이 생성해줄 정적 JSON 파일 경로
-// 로컬 파일이므로 별도의 외부 도메인이나 CORS 프록시가 필요 없습니다.
 const LOCAL_JSON_URL = 'pinned-repos.json';
+const REFRESH_INTERVAL_MS = 5 * 60 * 1000;
+
+let isFetching = false;
 
 // 기본 대표 이미지 매핑 테이블
 const PROJECT_IMAGES = {
@@ -127,8 +123,9 @@ function renderProjects(projects) {
     projectGrid.innerHTML = htmlContent;
 }
 
-// GitHub API를 통해 실시간 데이터를 가져오는 비동기 함수
 async function loadGitHubProjects() {
+    if (isFetching) return;
+    isFetching = true;
     try {
         // 캐시 방지를 위해 타임스탬프 쿼리 매개변수를 추가하여 매번 최신 데이터를 받아오도록 합니다.
         const response = await fetch(`${LOCAL_JSON_URL}?t=${new Date().getTime()}`);
@@ -176,10 +173,11 @@ async function loadGitHubProjects() {
         updateTimelineProgress();
     } catch (error) {
         console.warn('GitHub Pinned 연동 실패 (서버 생성 전이거나 오류), 기본 캐시 데이터로 표시합니다:', error);
-        // JSON 로드 에러 시 기존 캐시 데이터 렌더링 (안전장치)
         renderProjects(DEFAULT_PROJECTS);
         isTimelineLayoutCached = false;
         updateTimelineProgress();
+    } finally {
+        isFetching = false;
     }
 }
 
@@ -189,8 +187,7 @@ if (document.readyState === 'loading') {
         loadGitHubProjects();
         updateTimelineNowNode();
         updateTimelineProgress();
-        // 5분(300,000ms)마다 백그라운드에서 자동으로 핀 프로젝트 정보를 최신으로 갱신합니다.
-        setInterval(loadGitHubProjects, 300000);
+        setInterval(loadGitHubProjects, REFRESH_INTERVAL_MS);
     });
 } else {
     loadGitHubProjects();

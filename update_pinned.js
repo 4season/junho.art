@@ -99,6 +99,11 @@ const req = https.request(options, (res) => {
                 process.exit(1);
             }
 
+            if (!json.data?.user) {
+                console.error("오류: GitHub 사용자를 찾을 수 없습니다 (user: null).");
+                process.exit(1);
+            }
+
             const nodes = json.data.user.pinnedItems.nodes || [];
             
             // 포트폴리오에 알맞은 구조로 데이터 가공
@@ -135,6 +140,12 @@ const req = https.request(options, (res) => {
 
 req.on('error', (err) => {
     console.error("오류: HTTP 요청 실패:", err.message);
+    process.exit(1);
+});
+
+req.setTimeout(30000, () => {
+    req.destroy();
+    console.error("오류: GitHub API 요청 시간 초과 (30초).");
     process.exit(1);
 });
 

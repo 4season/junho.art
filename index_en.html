@@ -13,7 +13,7 @@
             }
             
             const savedLang = localStorage.getItem('user-language');
-            const browserLang = navigator.language || navigator.userLanguage;
+            const browserLang = navigator.language;
             
             // Set session check flag
             sessionStorage.setItem('lang-redirect-checked', 'true');
@@ -32,12 +32,12 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junho Heo | Undergraduate Researcher</title>
-    <meta name="description" content="Junho Heo | Undergraduate Researcher majoring in Computer Science at Baekseok University. Exploring the computational mechanisms of brain and mind through machine learning and Computational Psychiatry.">
+    <meta name="description" content="Junho Heo | Computer Science undergraduate researcher at Baekseok University. Exploring the computational mechanisms of the brain and mind through Computational Neuroscience and Computational Psychiatry.">
 
     <!-- Open Graph (Link previews for KakaoTalk, Facebook, Discord, etc.) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="junho.art — Undergraduate Researcher">
-    <meta property="og:description" content="Machine Learning & Computational Psychiatry — Portfolio of Junho Heo">
+    <meta property="og:description" content="Computational Neuroscience & Computational Psychiatry — Portfolio of Junho Heo">
     <meta property="og:image" content="https://junho.art/img/og_preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -48,7 +48,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="junho.art — Undergraduate Researcher">
-    <meta name="twitter:description" content="Machine Learning & Computational Psychiatry — Portfolio of Junho Heo">
+    <meta name="twitter:description" content="Computational Neuroscience & Computational Psychiatry — Portfolio of Junho Heo">
     <meta name="twitter:image" content="https://junho.art/img/og_preview.png">
 
     <link rel="stylesheet" href="style.css">
@@ -72,6 +72,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
     <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="canonical" href="https://junho.art/index_en.html">
+    <link rel="alternate" hreflang="ko" href="https://junho.art/">
+    <link rel="alternate" hreflang="en" href="https://junho.art/index_en.html">
 </head>
 
 <body>
@@ -85,16 +88,16 @@
 
     <!-- Mobile/Tablet Navigation Drawer -->
     <div class="nav-drawer" id="navDrawer">
-        <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="close-btn" id="closeBtn" aria-label="Close navigation menu">&times;</button>
         <a href="#about">About</a>
         <a href="#journey">Journey</a>
         <a href="#skills">Skills & Goals</a>
         <a href="#projects">Projects</a>
-        <a href="https://github.com/4season" target="_blank">GitHub</a>
-        <div class="mobile-lang-toggle" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; gap: 1rem; font-size: 1.1rem; font-weight: 700;">
-            <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" style="color: var(--text-color); text-decoration: none;">KO</a>
-            <span style="opacity: 0.3;">|</span>
-            <span style="color: var(--heading-color);">EN</span>
+        <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <div class="mobile-lang-toggle">
+            <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" class="lang-inactive">KO</a>
+            <span class="lang-sep">|</span>
+            <span class="lang-active">EN</span>
         </div>
     </div>
 
@@ -107,16 +110,15 @@
                 <a href="#journey">Journey</a>
                 <a href="#skills">Skills & Goals</a>
                 <a href="#projects">Projects</a>
-                <a href="https://github.com/4season" target="_blank" style="margin-right: 1.5rem;">GitHub <i
-                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                <span class="lang-toggle-container" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--border-color); padding: 0.2rem 0.6rem; border-radius: 20px; background-color: rgba(255,255,255,0.5);">
-                    <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" style="color: var(--text-color); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-color)'">KO</a>
-                    <span style="opacity: 0.3;">|</span>
-                    <span style="color: var(--heading-color);">EN</span>
+                <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer" class="github-nav-link">GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                <span class="lang-toggle-container">
+                    <a href="index.html" onclick="event.preventDefault(); localStorage.setItem('user-language', 'ko'); window.location.href='index.html';" class="lang-inactive">KO</a>
+                    <span class="lang-sep">|</span>
+                    <span class="lang-active">EN</span>
                 </span>
             </nav>
-            <button class="menu-btn" id="menuBtn">
-                <i class="fa-solid fa-bars"></i>
+            <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
             </button>
         </div>
     </header>
@@ -130,24 +132,24 @@
                     <div class="profile-img-container">
                         <img src="./img/junho_profile.jpg" alt="Profile Image" class="profile-img-internal">
                     </div>
-                    <div class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> Undergraduate Researcher</div>
+                    <div class="profile-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Undergraduate Researcher</div>
                 </div>
-                <h1>Hello, I'm Junho Heo, an Aspiring Researcher.</h1>
-                <p class="hero-lead">CS undergraduate researcher at Baekseok University, exploring the intersection of computational neuroscience and AI to understand human learning and decision-making.</p>
-                <p class="hero-motto" style="font-size: 1.25rem; font-weight: 500;">Turning complexity into clarity is an art.</p>
+                <h1>Hello, I'm Junho Heo, an aspiring researcher.</h1>
+                <p class="hero-lead">I am a computer science undergraduate researcher at Baekseok University, exploring human learning and decision-making through Computational Neuroscience and Computational Psychiatry.</p>
+                <p class="hero-motto">Turning complexity into clarity is an art.</p>
 
                 <div class="hero-quote glass-card">
-                    <i class="fa-solid fa-quote-left quote-icon"></i>
-                    <p>Facing cognitive and psychiatric challenges such as ADHD, narcolepsy, and dyslexia, I experienced firsthand how learning efficiency varies based on attention and arousal. What began as a personal struggle eventually transformed into a scientific inquiry: Can individual differences in learning and decision-making be explained through computational and cognitive processes?</p>
-                    <p style="margin-top: 1.2rem;">As I explored machine learning modeling in my computer engineering studies, I realized the necessity of computational models to explain human behavior and learning, moving beyond the interpretability limits of artificial neural networks. My goal is to become a researcher in <strong>Computational Psychiatry</strong>, using computational neuroscience models to study behavioral and neural data to understand the mechanisms of cognitive difficulties and develop personalized interventions.</p>
+                    <i class="fa-solid fa-quote-left quote-icon" aria-hidden="true"></i>
+                    <p>Having lived with cognitive and psychiatric challenges such as ADHD, narcolepsy, and dyslexia, I experienced firsthand how learning efficiency and decision-making can vary with attention and arousal states. What began as a personal struggle gradually became a scientific question: can these differences be explained as individual variation in <strong>computational and cognitive processes</strong>?</p>
+                    <p>Through computer science, machine learning, and neural network modeling, I came to see the need for computational models that connect data with human behavior and learning. My goal is to become a researcher in <strong>Computational Psychiatry</strong>, using computational neuroscience methods to analyze behavioral and neural data, clarify the mechanisms behind cognitive difficulties, and support personalized interventions.</p>
                 </div>
             </div>
         </section>
 
         <!-- Journey Section (Timeline) -->
         <section id="journey" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-route-highway"></i> My Journey</h2>
-            <p class="section-desc">Footsteps of an undergraduate researcher building foundations in academics, software development, and research.</p>
+            <h2><i class="fa-solid fa-route" aria-hidden="true"></i> My Journey</h2>
+            <p class="section-desc">A timeline of my growth toward research in Computational Neuroscience and Computational Psychiatry.</p>
 
             <div class="timeline">
                 <div class="timeline-line-bg"></div>
@@ -155,7 +157,7 @@
 
                 <!-- Timeline Item 1: Education -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-university"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Education | Spring 2021 ~</span>
@@ -168,46 +170,46 @@
 
                 <!-- Timeline Item 2: UML Competition -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Award | Fall 2023</span>
                             <span class="timeline-tag award-tag">Award</span>
                         </div>
                         <h3>UML Object-Oriented Modeling Competition Excellence Award</h3>
-                        <p>Awarded the Excellence Award for designing system component interactions and data flows. Defining complex interactions and flows logically served as my first stepping stone to structuring problems and translating them into computational models.</p>
+                        <p>Awarded the Excellence Award for designing system component interactions and data flows. This experience helped me learn how to structure complex problems and express them as logical models, which later shaped my interest in computational modeling.</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 3: Scholarship -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Honor | Spring 24, Fall 25 & Spring 26</span>
                             <span class="timeline-tag honor-tag">Scholarship</span>
                         </div>
                         <h3>Received Professor Recommendation Scholarship Three Times</h3>
-                        <p>Awarded the Professor Recommendation Scholarship three times (Spring 2024, Fall 2025, & Spring 2026) in recognition of my academic diligence and research potential. This helped expand my horizons as an aspiring researcher.</p>
+                        <p>Awarded the Professor Recommendation Scholarship three times (Spring 2024, Fall 2025, & Spring 2026) in recognition of my academic diligence and research potential. The recognition encouraged me to develop my research direction with greater focus.</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 4: DIP SW Convergence Program -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-users"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Activity | August 2025</span>
                             <span class="timeline-tag activity-tag">Activity</span>
                         </div>
                         <h3>Completed DIP SW Convergence Talent Program</h3>
-                        <p>Completed the Software Convergence Talent Development Program organized by the Daegu Digital Innovation Promotion Agency (DIP), extending software integration skills and collaborative teamwork capabilities.</p>
+                        <p>Completed the Software Convergence Talent Development Program organized by the Daegu Digital Innovation Promotion Agency (DIP), strengthening my software development skills and gaining experience collaborating on team projects.</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 5: Projects & Data Modeling -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-gears"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-gears" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Projects | Fall 2025 ~ Present</span>
@@ -220,47 +222,47 @@
 
                 <!-- Timeline Item 6: BAI Lab Internship -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-brain"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Research | Summer 2026 ~ Present</span>
                             <span class="timeline-tag proj-tag">Researcher</span>
                         </div>
                         <h3>Brain-AI Interface (BAI) lab Undergraduate Researcher</h3>
-                        <p>Participated as an undergraduate researcher at the Brain-AI Interface (BAI) Lab, setting up the initial research environment and learning the preprocessing workflows and analysis pipelines for neural data. Gaining hands-on laboratory experience, I am building research foundations for my future goal in Computational Psychiatry.</p>
+                        <p>Participated as an undergraduate researcher at the Brain-AI Interface (BAI) Lab, setting up the initial research environment and learning preprocessing workflows and analysis pipelines for neural data. Through hands-on laboratory experience, I am building the research foundation for Computational Neuroscience and Computational Psychiatry.</p>
                     </div>
                 </div>
 
                 <!-- Timeline Present Location Indicator Node -->
                 <div class="timeline-now-node">
                     <div class="now-badge">
-                        <i class="fa-solid fa-location-crosshairs fa-spin"></i> Current Journey Loading...
+                        <i class="fa-solid fa-location-crosshairs fa-spin" aria-hidden="true"></i> Currently In Progress
                     </div>
                 </div>
 
                 <!-- Timeline Item 7: Expected Graduation -->
                 <div class="timeline-item left">
-                    <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Education | Feb 2027 (Expected)</span>
                             <span class="timeline-tag edu-tag">Expected Grad</span>
                         </div>
                         <h3>Expected Graduation from Baekseok University</h3>
-                        <p>Concluding my Bachelor's degree in Computer Engineering, I will graduate with a solid foundation in machine learning modeling, data pre-processing, and analytical pipelines.</p>
+                        <p>As I complete my Bachelor's degree in Computer Engineering, I aim to further strengthen my foundation in machine learning modeling, data preprocessing, and analytical pipelines.</p>
                     </div>
                 </div>
 
                 <!-- Timeline Item 8: Future Roadmap -->
                 <div class="timeline-item right">
-                    <div class="timeline-dot"><i class="fa-solid fa-dna"></i></div>
+                    <div class="timeline-dot"><i class="fa-solid fa-dna" aria-hidden="true"></i></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <span class="timeline-date">Future Roadmap | Graduate Studies</span>
                             <span class="timeline-tag future-tag">Research Plan</span>
                         </div>
                         <h3>Computational Modeling of Neural Data and Cognitive Science</h3>
-                        <p>Aiming to pursue graduate studies to systematically research reinforcement learning, probabilistic modeling, and computational neuroscience. My goal is to characterize cognitive and psychiatric individual differences based on behavioral and neural data (EEG/fMRI) and develop computational models that support personalized diagnosis and intervention.</p>
+                        <p>I aim to pursue graduate studies to study reinforcement learning, probabilistic modeling, and computational neuroscience in depth. My goal is to characterize cognitive and psychiatric individual differences based on behavioral and neural data (EEG/fMRI) and develop computational models that support personalized diagnosis and intervention.</p>
                     </div>
                 </div>
             </div>
@@ -268,34 +270,34 @@
 
         <!-- Learning & Skills Section -->
         <section id="skills" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-graduation-cap"></i> Learning & Skills</h2>
-            <p class="section-desc">Technologies I have hands-on experience with, and core domains I wish to research deeply as an aspiring researcher.</p>
+            <h2><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Learning & Skills</h2>
+            <p class="section-desc">Technical skills I have built so far, and research areas I plan to deepen for Computational Neuroscience and Computational Psychiatry.</p>
 
             <div class="skills-grid">
                 <!-- Skill Card 1: Learned & Applied -->
                 <div class="skills-card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Hands-on & Applied</h3>
                     <p class="card-sub">Technologies I have directly applied through projects</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Data analysis & algorithm implementation using Python and C++</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Machine learning model implementation & experimental design (MLP, CNN)</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Structured/unstructured data analysis & purpose-specific dataset pre-processing</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Collaboration & source code version control using Git</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Data analysis & algorithm implementation using Python and C++</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Machine learning model implementation & experimental design (MLP, CNN)</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Structured/unstructured data analysis & purpose-specific dataset pre-processing</li>
+                        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Collaboration & source code version control using Git</li>
                     </ul>
                 </div>
 
                 <!-- Skill Card 2: Future Target -->
                 <div class="skills-card glass-card future-focus-card">
-                    <div class="card-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <div class="card-icon"><i class="fa-solid fa-microscope" aria-hidden="true"></i></div>
                     <h3>Research & Future Focus</h3>
                     <p class="card-sub">Core research domains I plan to study professionally in the future</p>
                     <ul class="skills-list">
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Foundational study in neuroscience & cognitive science</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> EEG/fMRI-based neural signal pre-processing & analysis</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Computational modeling of cognitive individual differences based on behavioral & neural data</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Mathematical study of reinforcement learning, probabilistic modeling, and computational neuroscience</li>
-                        <li><i class="fa-solid fa-circle-notch fa-spin"></i> Characterizing disease mechanisms & designing intervention methods in Computational Psychiatry</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Foundational study in neuroscience & cognitive science</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> EEG/fMRI-based neural signal pre-processing & analysis</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Computational modeling of cognitive individual differences based on behavioral & neural data</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Mathematical study of reinforcement learning, probabilistic modeling, and computational neuroscience</li>
+                        <li><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Characterizing disease mechanisms & designing intervention methods in Computational Psychiatry</li>
                     </ul>
                 </div>
             </div>
@@ -303,7 +305,7 @@
 
         <!-- Projects Section -->
         <section id="projects" class="section reveal-on-scroll">
-            <h2><i class="fa-solid fa-cubes"></i> Selected Works</h2>
+            <h2><i class="fa-solid fa-cubes" aria-hidden="true"></i> Selected Works</h2>
             <p class="section-desc">A selection of projects built to demonstrate my engineering and research capabilities.</p>
             <div class="project-grid" id="projectGrid">
                 <!-- Dynamically loaded by script.js -->
@@ -312,8 +314,7 @@
 
             <!-- GitHub Banner -->
             <div class="github-footer-note glass-card reveal-on-scroll">
-                <p><i class="fa-brands fa-github"></i> Project source code and development logs are available on <a href="https://github.com/4season"
-                        target="_blank">Junho Heo's GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</p>
+                <p><i class="fa-brands fa-github" aria-hidden="true"></i> Project source code and development logs are available on <a href="https://github.com/4season" target="_blank" rel="noopener noreferrer">Junho Heo's GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>.</p>
             </div>
         </section>
 
@@ -321,15 +322,11 @@
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2026 Junho Heo. <a href="./LICENSE" target="_blank"
-                style="color: inherit; text-decoration: underline;">All Rights Reserved</a>.
-        </p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.8;">
-            <i class="fa-solid fa-envelope"></i> Contact: <a href="mailto:contact@junho.art"
-                style="color: inherit; text-decoration: underline;">contact@junho.art</a>
-            <span style="margin: 0 10px; opacity: 0.5;">|</span>
-            <i class="fa-solid fa-id-card"></i> <a href="./signature.html"
-                style="color: inherit; text-decoration: underline;">Signature & Card Builder</a>
+        <p>&copy; 2026 Junho Heo. <a href="./LICENSE" target="_blank" rel="noopener noreferrer">All Rights Reserved</a>.</p>
+        <p class="contact-line">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact: <a href="mailto:contact@junho.art">contact@junho.art</a>
+            <span class="sep">|</span>
+            <i class="fa-solid fa-id-card" aria-hidden="true"></i> <a href="./signature.html">Signature & Card Builder</a>
         </p>
     </footer>
 
