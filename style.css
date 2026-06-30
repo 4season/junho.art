@@ -768,8 +768,6 @@ footer .sep { margin: 0 10px; opacity: 0.5; }
 /* 2단 그리드에서 Future Focus 카드에 오묘한 퍼플/그린 네온 보더 효과 부여 */
 .future-focus-card {
     position: relative;
-    border: 1px solid rgba(140, 127, 179, 0.4) !important;
-    box-shadow: 0 8px 32px 0 rgba(140, 127, 179, 0.08) !important;
 }
 .future-focus-card::before {
     content: '';
